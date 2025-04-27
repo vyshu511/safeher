@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peaceful Yoga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light Theme Variables */
+        :root {
+            --primary-light: #7a9e9d;
+            --secondary-light: #5a7d7c;
+            --background-light: #f9f9f9;
+            --text-light: #333;
+            --footer-light: #5a7d7c;
+        }
+
+        /* Purple Theme Variables */
+        .purple-theme {
+            --primary-light: #9b59b6;
+            --secondary-light: #8e44ad;
+            --background-light: #6a4c93;
+            --text-light: #f8f8f8;
+            --footer-light: #8e44ad;
+        }
+
+        /* Black Theme Variables */
+        .black-theme {
+            --primary-light: #f0f0f0;
+            --secondary-light: #ccc;
+            --background-light: #333;
+            --text-light: #f0f0f0;
+            --footer-light: #222;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-left: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--background-light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-light);
+            font-size: 2.2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-light);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-light);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            background-color: var(--primary-light);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Peaceful Yoga</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+        <button class="toggle-switch" onclick="toggleTheme()">🌙</button>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Inner Peace</h1>
+            <p>Join us for Yoga, Meditation, and Pranayama sessions</p>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Our Practices</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧘</div>
+                    <a href="yoga.html"><h3>Yoga</h3></a>
+                    <p>Enhance flexibility and strength through guided poses</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <a href="mediation.html"><h3>Meditation</h3></a>
+                    <p>Calm your mind and reduce stress</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌬️</div>
+                    <a href="prana.html"><h3>Pranayama</h3></a>
+                    <p>Learn breathing techniques for energy and clarity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <a href="mudras.html"><h3>Mudras</h3></a>
+                    <p>Develop present-moment awareness in daily life</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Peaceful Yoga. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentTheme = 'light';
+
+        function toggleTheme() {
+            if (currentTheme === 'light') {
+                document.body.classList.add('purple-theme');
+                document.body.classList.remove('black-theme');
+                currentTheme = 'purple';
+                document.querySelector('.toggle-switch').textContent = '🌑';
+            } else if (currentTheme === 'purple') {
+                document.body.classList.add('black-theme');
+                document.body.classList.remove('purple-theme');
+                currentTheme = 'black';
+                document.querySelector('.toggle-switch').textContent = '🌞';
+            } else {
+                document.body.classList.remove('purple-theme', 'black-theme');
+                currentTheme = 'light';
+                document.querySelector('.toggle-switch').textContent = '🌙';
+            }
+        }
+    </script>
+</body>
+</html>

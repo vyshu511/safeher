@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career & Confidence | SafeHer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: black;
+            --secondary: #FF6B9E;
+            --accent: #dc7dff;
+            --success: #642fd5;
+            --dark: #0D071C;
+            --light: #2A1B4D;
+            --white: #FFFFFF;
+            --glass: rgba(26, 16, 61, 0.86);
+            --border-radius: 20px;
+            --shadow: 0 8px 32px 0 rgba(106, 76, 147, 0.24);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--white);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1.5px solid var(--light);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                flex-direction: column;
+                position: fixed;
+                left: -100vw;
+                top: 65px;
+                width: 100vw;
+                background: var(--primary);
+                backdrop-filter: blur(16px);
+                transition: left 0.3s;
+                box-shadow: 0 2px 16px rgba(106, 76, 147, 0.05);
+                padding-top: 28px;
+                min-height: 100vh;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 14px 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* HERO SECTION */
+        .career-hero {
+            background: linear-gradient(135deg, var(--dark) 65%, var(--primary) 100%);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 75px;
+            position: relative;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .career-hero-content {
+            background: rgba(26, 16, 61, 0.89);
+            padding: 48px 32px 40px 32px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 32px 0 rgba(106, 76, 147, 0.23);
+            margin: 0 auto;
+            max-width: 650px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .career-hero h1 {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .career-hero p {
+            font-size: 1.15rem;
+            color: #E0D6FF;
+            margin-bottom: 30px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            color: var(--white);
+            padding: 13px 35px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.08rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 2px 12px 0 rgba(255, 107, 158, 0.18);
+            transition: background 0.22s, transform 0.2s, box-shadow 0.18s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 18px 0 rgba(255, 107, 158, 0.22);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            font-weight: 700;
+            transition: all 0.18s;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--white);
+            border-color: var(--accent);
+        }
+
+        /* CAREER RESOURCES SECTION */
+        .career-resources {
+            padding: 80px 0;
+            background: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: #D0C4FF;
+            margin: 0 auto;
+            font-size: 1.08rem;
+            max-width: 420px;
+            line-height: 1.5;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 34px;
+        }
+
+        .resource-card {
+            background: var(--primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.22s, box-shadow 0.22s;
+            cursor: pointer;
+            border: 1.5px solid var(--light);
+            overflow: hidden;
+            min-height: 345px;
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-7px) scale(1.035);
+            box-shadow: 0 8px 36px 0 rgba(106, 76, 147, 0.23);
+        }
+
+        .resource-icon {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.7rem;
+            color: white;
+            border-bottom: 2px solid var(--light);
+            background: linear-gradient(135deg, #6A3093, #4CA1AF);
+        }
+
+        .resource-content {
+            padding: 26px 26px 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .resource-content h3 {
+            font-size: 1.21rem;
+            margin-bottom: 13px;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .resource-content p {
+            color: #D0C4FF;
+            font-size: 1.01rem;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 60px 0;
+            background: var(--primary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--light);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: #E0D6FF;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #D0C4FF;
+            font-size: 0.9rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 55px 0 23px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin-top: 50px;
+            box-shadow: 0 -2px 16px 0 rgba(106, 76, 147, 0.19);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 35px;
+            margin-bottom: 28px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            font-size: 1.13rem;
+            background: var(--primary);
+            padding: 7px 13px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-bottom: 13px;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .footer-column ul li a {
+            color: #F0E5FF;
+            text-decoration: none;
+            transition: color 0.18s;
+            font-size: 1rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-column p {
+            color: #D0C4FF;
+            font-size: 0.99rem;
+            margin-bottom: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 13px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.12rem;
+            transition: background 0.18s, transform 0.18s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-4px) scale(1.07);
+            color: var(--white);
+        }
+
+        .footer-column ul li i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1.5px solid rgba(255, 255, 255, 0.09);
+            color: #D0C4FF;
+            font-size: 1rem;
+            padding-top: 16px;
+            opacity: 0.85;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .career-hero {
+                min-height: 60vh;
+                padding: 18px 0;
+                border-radius: 0;
+            }
+
+            .career-hero-content {
+                padding: 30px 12px;
+            }
+
+            .career-resources {
+                padding: 38px 0 26px;
+            }
+
+            .footer-content {
+                gap: 16px;
+            }
+
+            .footer-column h3 {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .career-hero h1 {
+                font-size: 1.55rem;
+            }
+
+            .btn,
+            .btn-outline {
+                font-size: 0.99rem;
+                padding: 11px 16px;
+            }
+
+            .resource-icon {
+                height: 100px;
+                font-size: 2rem;
+            }
+
+            .resource-content h3 {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    SafeHer
+                </a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="career.html" class="active">Career</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="career-hero">
+        <div class="container">
+            <div class="career-hero-content">
+                <h1>Career & Confidence</h1>
+                <p>Empowering your professional journey with resources, mentorship, and tools to build confidence and achieve your career goals.</p>
+                <a href="#resources" class="btn">Explore Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Resources Section -->
+    <!-- Career Resources Section -->
+<section class="career-resources" id="resources">
+    <div class="container">
+        <div class="section-title">
+            <h2>Career Development Resources</h2>
+            <p>Tools and guidance to help you navigate your professional path</p>
+        </div>
+        <div class="resources-grid">
+            <!-- Resource 1 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Resume Builder</h3>
+                    <p>Create professional resumes tailored to tech careers with our easy-to-use builder and templates designed for female engineers.</p>
+                    <a href="resume.html" class="btn btn-outline">Get Started</a>
+                </div>
+            </div>
+            
+            <!-- Resource 2 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Internship Finder</h3>
+                    <p>Discover vetted internship opportunities specifically for women in technology fields with our curated database.</p>
+                    <a href="internship.html" class="btn btn-outline">Find Opportunities</a>
+                </div>
+            </div>
+            
+            <!-- Resource 3 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>after 12th</h3>
+                    <p>Connect with experienced professionals in your field who can guide you through your academic and career journey.</p>
+                    <a href="https://pragatiprakashan.co.in/blog/career-options-after-12th" class="btn btn-outline">Join Program</a>
+                </div>
+            </div>
+            
+            <!-- Resource 4 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Interview Prep</h3>
+                    <p>Practice technical and behavioral interviews with our AI-powered platform and get personalized feedback.</p>
+                    <a href="interview.html" class="btn btn-outline">Start Practicing</a>
+                </div>
+            </div>
+            
+            <!-- Resource 5 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>After 10th</h3>
+                    <p>Learn effective networking strategies and access events specifically for women in tech.</p>
+                    <a href="https://leverageedu.com/blog/list-of-courses-after-10th-standard/" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Resource 6 -->
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Sports</h3>
+                    <p>Access workshops and exercises designed to build confidence and overcome imposter syndrome.</p>
+                    <a href="https://www.skvgwalior.org/blog/top-opportunities-for-girls-in-sports/#:~:text=Sports%20Management%20%E2%80%93%20Girls%20can%20pursue,of%20sports%20organisations%20and%20teams." class="btn btn-outline">Boost Confidence</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SafeHer</h3>
+                    <p>Empowering college women through safety, wellness, and growth tools designed for campus life.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="career.html">Career</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-bell"></i> Emergency Alert</a></li>
+                        <li><a href="#"><i class="fas fa-heart"></i> Wellness</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Self-Defense</a></li>
+                        <li><a href="career.html"><i class="fas fa-chart-line"></i> Career</a></li>
+                        <li><a href="#"><i class="fas fa-moon"></i> Sleep Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contact@safeher.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Campus Safety Ave, College Town</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SafeHer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

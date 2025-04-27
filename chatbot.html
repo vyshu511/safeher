@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Women's Wellness Companion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #9c27b0; /* Purple */
+      --secondary: #e91e63; /* Pink */
+      --light: #f3e5f5; /* Light purple */
+      --dark: #6a1b9a; /* Dark purple */
+      --accent: #ff4081; /* Bright pink */
+      --text: #4a4a4a;
+      --white: #FFFFFF;
+      --warning: #ff9800;
+      --success: #4caf50;
+      --info: #2196f3;
+      --emergency: #f44336;
+    }
+    
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 8px;
+      position: relative;
+      font-weight: 300;
+    }
+
+    #chatbox {
+      height: 500px;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-image: url('https://www.transparenttextures.com/patterns/light-honeycomb.png');
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 15px 20px;
+      border-radius: 18px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      position: relative;
+      animation: fadeIn 0.4s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 4px 8px rgba(156, 39, 176, 0.2);
+    }
+
+    .bot {
+      background-color: var(--white);
+      color: var(--text);
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+    }
+
+    .bot::before {
+      content: "🌸";
+      position: absolute;
+      left: -30px;
+      top: 5px;
+      font-size: 1.4rem;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+    }
+
+    .user::before {
+      content: "👩";
+      position: absolute;
+      right: -30px;
+      top: 5px;
+      font-size: 1.4rem;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+    }
+
+    .input-area {
+      display: flex;
+      padding: 20px;
+      background-color: var(--white);
+      border-top: 1px solid #f0f0f0;
+      position: relative;
+    }
+
+    #userInput {
+      flex: 1;
+      padding: 15px 25px;
+      border: 2px solid #e1bee7;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s;
+      background-color: #fafafa;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    #userInput:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+      background-color: var(--white);
+    }
+
+    #sendBtn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 0 30px;
+      margin-left: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(156, 39, 176, 0.2);
+    }
+
+    #sendBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(156, 39, 176, 0.3);
+    }
+
+    #sendBtn:active {
+      transform: translateY(0);
+    }
+
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-top: 1px solid #eee;
+    }
+
+    .quick-reply {
+      background-color: var(--white);
+      border: 1px solid #e1bee7;
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--primary);
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .quick-reply:hover {
+      background-color: var(--light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: var(--secondary);
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: var(--white);
+      border-radius: 18px;
+      align-self: flex-start;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+    }
+
+    .typing-dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--secondary);
+      border-radius: 50%;
+      margin: 0 3px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    .warning {
+      color: var(--warning);
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 20px;
+      padding: 0 20px;
+      max-width: 800px;
+      background-color: #fff8e1;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .emoji-response {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .health-tip {
+      background-color: #f8f5ff;
+      border-left: 4px solid var(--accent);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .health-tip::before {
+      content: "💡";
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      font-size: 1.2rem;
+      opacity: 0.2;
+    }
+
+    .symptom-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .symptom-list li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 30px;
+      border-bottom: 1px dashed #f0f0f0;
+    }
+
+    .symptom-list li:last-child {
+      border-bottom: none;
+    }
+
+    .symptom-list li:before {
+      content: "•";
+      color: var(--accent);
+      font-size: 2rem;
+      position: absolute;
+      left: 5px;
+      top: -5px;
+    }
+
+    .emergency {
+      color: var(--emergency);
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #ffebee;
+      border-radius: 6px;
+    }
+
+    .emergency::before {
+      content: "⚠️";
+      margin-right: 8px;
+    }
+
+    .success {
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    .info-box {
+      background-color: #e3f2fd;
+      border-left: 4px solid var(--info);
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .topic-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      border: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .topic-card h3 {
+      margin-top: 0;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+    }
+
+    .topic-card h3 i {
+      margin-right: 10px;
+    }
+
+    .topic-card p {
+      margin-bottom: 0;
+      color: var(--text);
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+      margin: 15px 0;
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1) translateY(-5px);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        border-radius: 0;
+        max-width: 100%;
+      }
+      
+      #chatbox {
+        height: 400px;
+        padding: 15px;
+      }
+      
+      .message {
+        max-width: 90%;
+        padding: 12px 16px;
+      }
+
+      .bot::before, .user::before {
+        display: none;
+      }
+
+      .input-area {
+        padding: 15px;
+      }
+
+      #userInput {
+        padding: 12px 20px;
+      }
+
+      #sendBtn {
+        padding: 0 20px;
+      }
+
+      .topic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    /* Animation classes */
+    .bounce {
+      animation: bounce 0.5s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .rotate {
+      animation: rotate 1s;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-heartbeat"></i> Women's Wellness Companion</h1>
+      <div class="subtitle">Your personalized health guide for all stages of life</div>
+    </header>
+    
+    <div id="chatbox"></div>
+    
+    <div class="quick-replies">
+      <div class="quick-reply" onclick="quickReply('Period symptoms')"><i class="fas fa-calendar-alt"></i> Period symptoms</div>
+      <div class="quick-reply" onclick="quickReply('Thyroid causes')"><i class="fas fa-butterfly"></i> Thyroid causes</div>
+      <div class="quick-reply" onclick="quickReply('PCOS management')"><i class="fas fa-egg"></i> PCOS management</div>
+      <div class="quick-reply" onclick="quickReply('UTI prevention')"><i class="fas fa-toilet"></i> UTI prevention</div>
+      <div class="quick-reply" onclick="quickReply('Pregnancy tips')"><i class="fas fa-baby"></i> Pregnancy tips</div>
+      <div class="quick-reply" onclick="quickReply('Menopause symptoms')"><i class="fas fa-moon"></i> Menopause</div>
+    </div>
+    
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Ask about your health concerns...">
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i> Send</button>
+    </div>
+  </div>
+  
+  <p class="warning"><i class="fas fa-exclamation-triangle"></i> <strong>Disclaimer:</strong> This chatbot provides general health information only and is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+
+  <div class="floating-btn" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    const chatbox = document.getElementById("chatbox");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // Enhanced medical information with more topics
+    const medicalInfo = {
+      menstrualHealth: {
+        symptoms: `🌸 <strong>Menstrual Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Cramps in lower abdomen (dysmenorrhea)</li>
+          <li>Bloating and breast tenderness</li>
+          <li>Mood swings and irritability (PMS)</li>
+          <li>Fatigue and headaches</li>
+          <li>Food cravings or appetite changes</li>
+          <li>Acne breakouts</li>
+        </ul>
+        <div class="health-tip"><strong>Tip:</strong> Regular exercise and a balanced diet rich in omega-3s can help reduce menstrual discomfort. Consider tracking your symptoms with an app to identify patterns.</div>
+        <span class="emergency">Seek medical help if:</span> Severe pain preventing normal activities, heavy bleeding (soaking through a pad/tampon every hour), or symptoms lasting more than 7 days`,
+        
+        causes: `🩸 <strong>Period Causes & Physiology:</strong>
+        <ul class="symptom-list">
+          <li>Natural shedding of uterine lining (endometrium)</li>
+          <li>Hormonal changes (prostaglandins cause contractions)</li>
+          <li>PMS: Related to serotonin level fluctuations</li>
+          <li>Underlying conditions: Endometriosis, fibroids, PCOS</li>
+        </ul>
+        <div class="info-box">
+          The menstrual cycle typically lasts 28 days but can range from 21-35 days. It's controlled by hormones from the pituitary gland and ovaries.
+        </div>`,
+        
+        treatment: `💊 <strong>Period Pain Management:</strong>
+        <ul class="symptom-list">
+          <li><strong>Heat therapy:</strong> Hot water bottle or heating pad on lower abdomen</li>
+          <li><strong>OTC medications:</strong> Ibuprofen (anti-inflammatory) or acetaminophen</li>
+          <li><strong>Exercise:</strong> Gentle yoga, walking, or stretching</li>
+          <li><strong>Dietary changes:</strong> Reduce salt, caffeine, and alcohol; increase magnesium-rich foods</li>
+          <li><strong>Alternative therapies:</strong> Acupuncture, TENS machines, or supplements like magnesium</li>
+        </ul>
+        <span class="emergency">Consult doctor for:</span> Suspected endometriosis, PCOS, or if symptoms significantly impact your quality of life`
+      },
+      thyroid: {
+        symptoms: `🦋 <strong>Thyroid Disorder Symptoms:</strong>
+        <div class="topic-grid">
+          <div class="topic-card">
+            <h3><i class="fas fa-weight"></i> Hypothyroidism</h3>
+            <p>Fatigue, weight gain, cold sensitivity, dry skin, hair loss, depression, constipation</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-bolt"></i> Hyperthyroidism</h3>
+            <p>Weight loss, rapid heartbeat, anxiety, tremors, sweating, heat sensitivity, insomnia</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <ul class="symptom-list">
+          <li>Neck swelling or discomfort (goiter)</li>
+          <li>Changes in menstrual patterns</li>
+          <li>Muscle weakness or aches</li>
+          <li>Cholesterol level changes</li>
+        </ul>`,
+        
+        causes: `🔍 <strong>Thyroid Disorder Causes:</strong>
+        <ul class="symptom-list">
+          <li><strong>Autoimmune diseases:</strong> Hashimoto's (hypo), Graves' (hyper)</li>
+          <li><strong>Iodine deficiency</strong> (rare in developed countries)</li>
+          <li><strong>Postpartum thyroiditis</strong> (after pregnancy)</li>
+          <li><strong>Thyroid nodules or cancer</strong></li>
+          <li><strong>Genetic predisposition</strong></li>
+          <li><strong>Certain medications</strong> (lithium, amiodarone)</li>
+        </ul>
+        <div class="health-tip">
+          <strong>Did you know?</strong> Women are 5-8 times more likely than men to develop thyroid problems, especially after pregnancy and menopause.
+        </div>`,
+        
+        management: `💊 <strong>Thyroid Management:</strong>
+        <ul class="symptom-list">
+          <li><strong>Diagnosis:</strong> TSH blood test is primary screening</li>
+          <li><strong>Hypothyroidism:</strong> Levothyroxine (synthetic thyroid hormone)</li>
+          <li><strong>Hyperthyroidism:</strong> Anti-thyroid meds, radioactive iodine, or surgery</li>
+          <li><strong>Monitoring:</strong> Regular blood tests to adjust medication</li>
+          <li><strong>Lifestyle:</strong> Balanced diet with selenium/zinc, stress management</li>
+        </ul>
+        <span class="success">With proper treatment, most thyroid disorders can be well-controlled!</span>`
+      },
+      pcos: {
+        symptoms: `🍩 <strong>PCOS Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Irregular periods or no periods (oligomenorrhea/amenorrhea)</li>
+          <li>Excess androgen: Hirsutism (facial/body hair), acne, male-pattern baldness</li>
+          <li>Polycystic ovaries on ultrasound (not always present)</li>
+          <li>Weight gain and difficulty losing weight</li>
+          <li>Insulin resistance (dark skin patches - acanthosis nigricans)</li>
+          <li>Fertility challenges</li>
+        </ul>
+        <div class="info-box">
+          PCOS is diagnosed using the Rotterdam criteria - you need 2 of 3: irregular periods, signs of high androgens, or polycystic ovaries on ultrasound.
+        </div>`,
+        
+        management: `🌈 <strong>PCOS Management:</strong>
+        <div class="topic-grid">
+          <div class="topic-card">
+            <h3><i class="fas fa-utensils"></i> Diet</h3>
+            <p>Low glycemic index foods, anti-inflammatory diet, balanced macros</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-running"></i> Exercise</h3>
+            <p>150 mins/week moderate activity, strength training 2x/week</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-pills"></i> Medications</h3>
+            <p>Birth control, metformin, anti-androgens, fertility treatments</p>
+          </div>
+        </div>
+        <div class="health-tip">
+          <strong>Good news:</strong> Even 5-10% weight loss can significantly improve PCOS symptoms and restore regular periods!
+        </div>`
+      },
+      pregnancy: {
+        stages: `🤰 <strong>Pregnancy Trimesters:</strong>
+        <div class="topic-grid">
+          <div class="topic-card">
+            <h3><i class="fas fa-seedling"></i> First Trimester</h3>
+            <p>Weeks 1-12: Morning sickness, fatigue, breast changes</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-baby"></i> Second Trimester</h3>
+            <p>Weeks 13-26: "Golden period", baby movements, growing belly</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-weight"></i> Third Trimester</h3>
+            <p>Weeks 27-40: Back pain, swelling, preparation for birth</p>
+          </div>
+        </div>`,
+        
+        tips: `🌟 <strong>Healthy Pregnancy Tips:</strong>
+        <ul class="symptom-list">
+          <li>Take prenatal vitamins with folic acid</li>
+          <li>Stay hydrated (8-10 glasses water/day)</li>
+          <li>Eat small, frequent meals to combat nausea</li>
+          <li>Practice safe exercises (walking, swimming, prenatal yoga)</li>
+          <li>Avoid alcohol, smoking, and limit caffeine</li>
+          <li>Get plenty of rest and sleep on your side</li>
+        </ul>
+        <div class="health-tip">
+          <strong>Kick counts:</strong> Starting at 28 weeks, monitor baby movements. Report decreased activity to your provider.
+        </div>`,
+        
+        warning: `🚨 <strong>Emergency Pregnancy Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Severe abdominal pain</li>
+          <li>Vaginal bleeding</li>
+          <li>Severe headaches or vision changes</li>
+          <li>Sudden swelling (face/hands)</li>
+          <li>Decreased fetal movement</li>
+          <li>Fluid leakage (possible water breaking)</li>
+        </ul>
+        <span class="emergency">Seek immediate medical attention for any of these symptoms!</span>`
+      },
+      menopause: {
+        symptoms: `🌙 <strong>Menopause Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Hot flashes and night sweats</li>
+          <li>Irregular periods leading to cessation</li>
+          <li>Vaginal dryness and discomfort</li>
+          <li>Mood swings and irritability</li>
+          <li>Sleep disturbances</li>
+          <li>Weight gain and slowed metabolism</li>
+          <li>Decreased bone density</li>
+        </ul>`,
+        
+        management: `💫 <strong>Menopause Management:</strong>
+        <ul class="symptom-list">
+          <li><strong>Hormone therapy:</strong> Estrogen/progestin for symptom relief</li>
+          <li><strong>Vaginal estrogen:</strong> For local symptoms</li>
+          <li><strong>Non-hormonal options:</strong> SSRIs, gabapentin, clonidine</li>
+          <li><strong>Lifestyle:</strong> Regular exercise, calcium/vitamin D, stress reduction</li>
+          <li><strong>Alternative therapies:</strong> Phytoestrogens, black cohosh (consult doctor)</li>
+        </ul>
+        <div class="health-tip">
+          <strong>Perimenopause</strong> (the transition phase) can last 4-8 years before menopause (12 months without periods).
+        </div>`
+      },
+      mentalHealth: {
+        anxiety: `🌀 <strong>Anxiety Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Excessive worry or fear</li>
+          <li>Restlessness or feeling on edge</li>
+          <li>Difficulty concentrating</li>
+          <li>Sleep disturbances</li>
+          <li>Physical symptoms: Rapid heartbeat, sweating, trembling</li>
+        </ul>`,
+        
+        depression: `☁️ <strong>Depression Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Persistent sadness or emptiness</li>
+          <li>Loss of interest in activities</li>
+          <li>Changes in appetite/weight</li>
+          <li>Fatigue or loss of energy</li>
+          <li>Feelings of worthlessness or guilt</li>
+          <li>Thoughts of death or suicide</li>
+        </ul>
+        <span class="emergency">If you're having suicidal thoughts, please contact a mental health professional immediately.</span>`,
+        
+        coping: `🌈 <strong>Mental Health Coping Strategies:</strong>
+        <div class="topic-grid">
+          <div class="topic-card">
+            <h3><i class="fas fa-brain"></i> Mindfulness</h3>
+            <p>Meditation, deep breathing, grounding techniques</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-heartbeat"></i> Physical Health</h3>
+            <p>Regular exercise, balanced diet, adequate sleep</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-hands-helping"></i> Support</h3>
+            <p>Therapy, support groups, social connections</p>
+          </div>
+        </div>`
+      },
+      uti: {
+        symptoms: `🚽 <strong>UTI Symptoms:</strong>
+        <ul class="symptom-list">
+          <li>Burning sensation during urination</li>
+          <li>Frequent, urgent need to urinate</li>
+          <li>Cloudy, dark, or strong-smelling urine</li>
+          <li>Pelvic pain (in women)</li>
+          <li>Low-grade fever (in some cases)</li>
+        </ul>`,
+        
+        prevention: `🛡 <strong>UTI Prevention:</strong>
+        <ul class="symptom-list">
+          <li>Drink plenty of water (6-8 glasses/day)</li>
+          <li>Urinate before and after sexual activity</li>
+          <li>Wipe from front to back</li>
+          <li>Avoid irritating feminine products</li>
+          <li>Consider cranberry supplements (may help some women)</li>
+          <li>Don't "hold it" - urinate when needed</li>
+        </ul>
+        <div class="health-tip">
+          <strong>Did you know?</strong> Women are more prone to UTIs because of their shorter urethra, which allows bacteria easier access to the bladder.
+        </div>`,
+        
+        treatment: `💊 <strong>UTI Treatment:</strong>
+        <ul class="symptom-list">
+          <li>Antibiotics (prescribed by doctor)</li>
+          <li>Pain relievers (phenazopyridine for symptom relief)</li>
+          <li>Increased fluid intake</li>
+          <li>Heating pad for discomfort</li>
+        </ul>
+        <span class="emergency">Seek help if:</span> Fever, back pain (possible kidney infection), or symptoms persist after treatment`
+      },
+      breastHealth: {
+        selfExam: `👐 <strong>Breast Self-Exam Guide:</strong>
+        <ol style="padding-left: 20px;">
+          <li><strong>Visual inspection:</strong> Look at breasts in mirror with hands on hips and raised</li>
+          <li><strong>Manual exam:</strong> Use pads of fingers to feel breast tissue in circular motions</li>
+          <li><strong>Pattern:</strong> Follow a consistent pattern (lines, circles, or wedges)</li>
+          <li><strong>Coverage:</strong> Include from collarbone to bra line and armpit</li>
+          <li><strong>Frequency:</strong> Best done monthly, 3-5 days after period ends</li>
+        </ol>
+        <div class="health-tip">
+          <strong>Remember:</strong> Most breast changes aren't cancer, but report any new lumps, skin changes, or nipple discharge to your doctor.
+        </div>`,
+        
+        screening: `🏥 <strong>Breast Cancer Screening:</strong>
+        <ul class="symptom-list">
+          <li><strong>Mammograms:</strong> Start at age 40-50 (discuss with doctor)</li>
+          <li><strong>Clinical exams:</strong> Every 1-3 years from age 25-39, annually after 40</li>
+          <li><strong>High risk:</strong> Additional screening (MRI) may be needed</li>
+        </ul>`
+      },
+      nutrition: {
+        essentials: `🍎 <strong>Women's Nutritional Needs:</strong>
+        <div class="topic-grid">
+          <div class="topic-card">
+            <h3><i class="fas fa-bone"></i> Calcium</h3>
+            <p>1000-1200mg/day for bone health (dairy, leafy greens, fortified foods)</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-leaf"></i> Iron</h3>
+            <p>18mg/day (more if pregnant) - red meat, beans, spinach (pair with vitamin C)</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-sun"></i> Vitamin D</h3>
+            <p>600-800 IU/day - fatty fish, fortified milk, sunlight</p>
+          </div>
+          <div class="topic-card">
+            <h3><i class="fas fa-dna"></i> Folate</h3>
+            <p>400mcg (600 if pregnant) - leafy greens, citrus, beans, fortified grains</p>
+          </div>
+        </div>`,
+        
+        tips: `🥗 <strong>Healthy Eating Tips:</strong>
+        <ul class="symptom-list">
+          <li>Focus on whole foods: fruits, vegetables, whole grains, lean proteins</li>
+          <li>Stay hydrated (half your weight in oz of water daily)</li>
+          <li>Practice mindful eating</li>
+          <li>Limit processed foods and added sugars</li>
+          <li>Don't skip meals - aim for balance</li>
+        </ul>`
+      },
+      fitness: {
+        benefits: `💪 <strong>Women's Fitness Benefits:</strong>
+        <ul class="symptom-list">
+          <li>Reduces risk of osteoporosis</li>
+          <li>Helps manage weight and metabolism</li>
+          <li>Improves mood and reduces stress</li>
+          <li>Lowers risk of heart disease</li>
+          <li>Improves sleep quality</li>
+          <li>Boosts energy levels</li>
+        </ul>`,
+        
+        recommendations: `🏋️ <strong>Fitness Recommendations:</strong>
+        <ul class="symptom-list">
+          <li><strong>Cardio:</strong> 150 mins moderate or 75 mins vigorous weekly</li>
+          <li><strong>Strength training:</strong> 2+ days/week (all major muscle groups)</li>
+          <li><strong>Flexibility:</strong> Stretch major muscle groups regularly</li>
+          <li><strong>Pelvic floor:</strong> Kegel exercises for bladder control</li>
+          <li><strong>Listen to your body:</strong> Adjust for menstrual cycle, pregnancy, etc.</li>
+        </ul>`
+      }
+    };
+
+    // Enhanced emotional responses
+    const emotionalResponses = {
+      love: [
+        "💖 That's so sweet! I'm here to support your health journey with care and compassion.",
+        "🌸 Aww, sending virtual hugs your way! Remember to practice self-care today.",
+        "💕 You're wonderful! Let me know how I can help with your health questionsor concerns."
+],
+happy: [
+"😊 It's great to hear you're feeling happy! Positive emotions are wonderful for your health.",
+"🌈 Happiness looks good on you! Did you know joyful moods can boost your immune system?",
+"🎉 Yay for good vibes! Let's keep that positivity going with healthy habits."
+],
+sad: [
+"🤗 I'm sorry you're feeling down. Remember this is temporary, and you're not alone.",
+"💙 It's okay to feel sad sometimes. Would you like some self-care suggestions?",
+"☔ After every storm comes sunshine. Be gentle with yourself during tough times."
+],
+stressed: [
+"🧘‍♀️ Stress can feel overwhelming. Try taking 3 deep breaths with me: inhale... hold... exhale...",
+"🌿 Stress is tough on the body. Maybe a short walk or warm tea could help right now?",
+"🕯️ Remember to pause and breathe. You're stronger than you think in stressful moments."
+],
+anxious: [
+"🦋 Anxiety can feel like butterflies gone wild. Try grounding techniques: name 5 things you can see around you.",
+"🌊 Imagine your anxiety as waves - they rise, but they always pass. This too shall pass.",
+"📌 Let's focus on what's within your control right now. Small steps make big differences."
+],
+angry: [
+"🔥 Anger is a valid emotion. Try counting to 10 or squeezing a stress ball to release tension safely.",
+"🌬️ When anger flares, pause and breathe before reacting. You've got this.",
+"🧊 Cool down with some cold water on your wrists or a short walk to clear your mind."
+],
+tired: [
+"😴 Fatigue is your body's way of asking for rest. Honor that need when possible.",
+"🛌 Quality sleep is foundational to health. Consider a relaxing bedtime routine tonight.",
+"⚡ For energy slumps, try gentle movement, hydration, and protein-rich snacks."
+],
+pain: [
+"🤕 I'm sorry you're in pain. Remember to consult a doctor for persistent or severe pain.",
+"🩹 Pain is your body's signal. Rest and proper care are important for healing.",
+"💆‍♀️ Heat/cold therapy, gentle stretches, and OTC meds (if appropriate) may help manage pain."
+]
+};
+
+// Initialize with welcome message
+window.onload = function() {
+  setTimeout(() => {
+    addBotMessage(`<div class="emoji-response">🌸</div> <strong>Welcome to Women's Wellness Companion!</strong> I'm here to provide information about women's health topics including menstrual health, PCOS, thyroid issues, pregnancy, menopause, mental health, and general wellness. How can I help you today?`);
+    
+    // Add quick tips after a delay
+    setTimeout(() => {
+      addBotMessage(`<div class="health-tip"><strong>Quick Tip:</strong> Did you know staying hydrated can help reduce bloating and fatigue during your period? Try drinking at least 8 glasses of water daily!</div>`);
+    }, 1500);
+  }, 500);
+};
+
+// Send message when button is clicked
+sendBtn.addEventListener("click", sendMessage);
+
+// Send message when Enter is pressed
+userInput.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
+
+// Quick reply function
+function quickReply(topic) {
+  userInput.value = topic;
+  sendMessage();
+}
+
+// Scroll to top function
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// Main function to send messages
+function sendMessage() {
+  const message = userInput.value.trim();
+  if (message === "") return;
+  
+  // Add user message to chatbox
+  addUserMessage(message);
+  userInput.value = "";
+  
+  // Show typing indicator
+  showTyping();
+  
+  // Process after a short delay to simulate thinking
+  setTimeout(() => {
+    processMessage(message.toLowerCase());
+  }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+}
+
+// Add user message to chat
+function addUserMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message", "user", "bounce");
+  messageElement.innerHTML = message;
+  chatbox.appendChild(messageElement);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// Add bot message to chat
+function addBotMessage(message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message", "bot", "bounce");
+  messageElement.innerHTML = message;
+  chatbox.appendChild(messageElement);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// Show typing indicator
+function showTyping() {
+  const typingElement = document.createElement("div");
+  typingElement.classList.add("typing-indicator");
+  typingElement.id = "typing";
+  typingElement.innerHTML = `
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+    <div class="typing-dot"></div>
+  `;
+  chatbox.appendChild(typingElement);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// Hide typing indicator
+function hideTyping() {
+  const typingElement = document.getElementById("typing");
+  if (typingElement) {
+    typingElement.remove();
+  }
+}
+
+// Process user message and generate response
+function processMessage(message) {
+  hideTyping();
+  
+  // Check for emotional content first
+  const emotionKeywords = {
+    love: ["love", "adore", "like you", "fond"],
+    happy: ["happy", "joy", "excited", "good", "great", "wonderful"],
+    sad: ["sad", "depressed", "unhappy", "miserable", "down"],
+    stressed: ["stress", "overwhelmed", "pressure", "stressed"],
+    anxious: ["anxious", "nervous", "worried", "panic", "scared"],
+    angry: ["angry", "mad", "furious", "annoyed", "irritated"],
+    tired: ["tired", "exhausted", "fatigue", "sleepy", "drained"],
+    pain: ["pain", "hurt", "ache", "sore", "cramps"]
+  };
+  
+  let emotionDetected = null;
+  for (const [emotion, keywords] of Object.entries(emotionKeywords)) {
+    if (keywords.some(keyword => message.includes(keyword))) {
+      emotionDetected = emotion;
+      break;
+    }
+  }
+  
+  if (emotionDetected) {
+    const responses = emotionalResponses[emotionDetected];
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    addBotMessage(randomResponse);
+    return;
+  }
+  
+  // Process health-related queries
+  let response = "";
+  
+  // Menstrual health
+  if (message.includes("period") || message.includes("menstrual") || message.includes("pms")) {
+    if (message.includes("symptom")) {
+      response = medicalInfo.menstrualHealth.symptoms;
+    } else if (message.includes("cause") || message.includes("why")) {
+      response = medicalInfo.menstrualHealth.causes;
+    } else if (message.includes("treatment") || message.includes("relief") || message.includes("manage")) {
+      response = medicalInfo.menstrualHealth.treatment;
+    } else {
+      response = `🌸 <strong>Menstrual Health Information</strong><br>
+      I can provide information about:<br>
+      - Period symptoms and what's normal<br>
+      - Causes of menstrual changes<br>
+      - Pain management strategies<br>
+      <br>Try asking about specific aspects like "period symptoms" or "period pain relief".`;
+    }
+  }
+  // Thyroid
+  else if (message.includes("thyroid")) {
+    if (message.includes("symptom")) {
+      response = medicalInfo.thyroid.symptoms;
+    } else if (message.includes("cause")) {
+      response = medicalInfo.thyroid.causes;
+    } else if (message.includes("manage") || message.includes("treatment")) {
+      response = medicalInfo.thyroid.management;
+    } else {
+      response = `🦋 <strong>Thyroid Information</strong><br>
+      Thyroid disorders affect metabolism and energy. I can discuss:<br>
+      - Symptoms of hypo/hyperthyroidism<br>
+      - Causes of thyroid dysfunction<br>
+      - Management and treatment options<br>
+      <br>Try asking specifically about "thyroid symptoms" or "thyroid treatment".`;
+    }
+  }
+  // PCOS
+  else if (message.includes("pcos")) {
+    if (message.includes("symptom")) {
+      response = medicalInfo.pcos.symptoms;
+    } else if (message.includes("manage") || message.includes("treatment")) {
+      response = medicalInfo.pcos.management;
+    } else {
+      response = `🍩 <strong>PCOS Information</strong><br>
+      Polycystic Ovary Syndrome affects hormones and metabolism. I can discuss:<br>
+      - Common PCOS symptoms<br>
+      - Management strategies (diet, exercise, meds)<br>
+      - Fertility considerations<br>
+      <br>Ask specifically about "PCOS symptoms" or "PCOS management".`;
+    }
+  }
+  // Pregnancy
+  else if (message.includes("pregnant") || message.includes("pregnancy")) {
+    if (message.includes("stage") || message.includes("trimester")) {
+      response = medicalInfo.pregnancy.stages;
+    } else if (message.includes("tip")) {
+      response = medicalInfo.pregnancy.tips;
+    } else if (message.includes("warning") || message.includes("emergency")) {
+      response = medicalInfo.pregnancy.warning;
+    } else {
+      response = `🤰 <strong>Pregnancy Information</strong><br>
+      I can provide information about:<br>
+      - Pregnancy stages and what to expect<br>
+      - Tips for a healthy pregnancy<br>
+      - Warning signs requiring medical attention<br>
+      <br>Try asking about "pregnancy stages" or "pregnancy tips".`;
+    }
+  }
+  // Menopause
+  else if (message.includes("menopause")) {
+    if (message.includes("symptom")) {
+      response = medicalInfo.menopause.symptoms;
+    } else if (message.includes("manage") || message.includes("treatment")) {
+      response = medicalInfo.menopause.management;
+    } else {
+      response = `🌙 <strong>Menopause Information</strong><br>
+      Menopause is a natural transition. I can discuss:<br>
+      - Common symptoms and changes<br>
+      - Management and treatment options<br>
+      - Long-term health considerations<br>
+      <br>Ask specifically about "menopause symptoms" or "menopause treatment".`;
+    }
+  }
+  // Mental health
+  else if (message.includes("mental") || message.includes("depress") || message.includes("anxiety")) {
+    if (message.includes("anxious") || message.includes("anxiety")) {
+      response = medicalInfo.mentalHealth.anxiety;
+    } else if (message.includes("depress")) {
+      response = medicalInfo.mentalHealth.depression;
+    } else if (message.includes("coping") || message.includes("strateg")) {
+      response = medicalInfo.mentalHealth.coping;
+    } else {
+      response = `🧠 <strong>Mental Health Information</strong><br>
+      Mental wellness is crucial for overall health. I can discuss:<br>
+      - Anxiety symptoms and management<br>
+      - Depression signs and coping strategies<br>
+      - General mental wellness tips<br>
+      <br>Try asking about "anxiety symptoms" or "depression coping".`;
+    }
+  }
+  // UTI
+  else if (message.includes("uti") || message.includes("urinary")) {
+    if (message.includes("symptom")) {
+      response = medicalInfo.uti.symptoms;
+    } else if (message.includes("prevent")) {
+      response = medicalInfo.uti.prevention;
+    } else if (message.includes("treat")) {
+      response = medicalInfo.uti.treatment;
+    } else {
+      response = `🚽 <strong>UTI Information</strong><br>
+      Urinary tract infections are common in women. I can discuss:<br>
+      - UTI symptoms to watch for<br>
+      - Prevention strategies<br>
+      - Treatment options<br>
+      <br>Ask specifically about "UTI symptoms" or "UTI prevention".`;
+    }
+  }
+  // Breast health
+  else if (message.includes("breast")) {
+    if (message.includes("exam") || message.includes("self-check")) {
+      response = medicalInfo.breastHealth.selfExam;
+    } else if (message.includes("screen")) {
+      response = medicalInfo.breastHealth.screening;
+    } else {
+      response = `👐 <strong>Breast Health Information</strong><br>
+      Regular breast awareness is important. I can discuss:<br>
+      - How to perform self-exams<br>
+      - Recommended screening guidelines<br>
+      - Signs to discuss with your doctor<br>
+      <br>Try asking about "breast self-exam" or "breast screening".`;
+    }
+  }
+  // Nutrition
+  else if (message.includes("diet") || message.includes("nutrition") || message.includes("eat")) {
+    if (message.includes("essential") || message.includes("nutrient")) {
+      response = medicalInfo.nutrition.essentials;
+    } else if (message.includes("tip")) {
+      response = medicalInfo.nutrition.tips;
+    } else {
+      response = `🍎 <strong>Nutrition Information</strong><br>
+      Proper nutrition supports all body systems. I can discuss:<br>
+      - Key nutrients women need<br>
+      - Healthy eating strategies<br>
+      - Special considerations for different life stages<br>
+      <br>Ask about "nutrition essentials" or "healthy eating tips".`;
+    }
+  }
+  // Fitness
+  else if (message.includes("exercise") || message.includes("fitness") || message.includes("workout")) {
+    if (message.includes("benefit")) {
+      response = medicalInfo.fitness.benefits;
+    } else if (message.includes("recommend")) {
+      response = medicalInfo.fitness.recommendations;
+    } else {
+      response = `💪 <strong>Fitness Information</strong><br>
+      Regular activity is vital for women's health. I can discuss:<br>
+      - Benefits of exercise for women<br>
+      - Recommended activity levels<br>
+      - Special considerations<br>
+      <br>Try asking about "fitness benefits" or "exercise recommendations".`;
+    }
+  }
+  // General help
+  else if (message.includes("help") || message.includes("support") || message.includes("advice")) {
+    response = `💖 <strong>How I Can Help</strong><br>
+    I can provide information on many women's health topics including:<br>
+    - Menstrual health and period concerns<br>
+    - Reproductive health (PCOS, pregnancy)<br>
+    - Hormonal changes (thyroid, menopause)<br>
+    - Mental wellness and stress management<br>
+    - General health (nutrition, fitness)<br>
+    <br>Try asking about specific concerns like "period symptoms" or "menopause management".`;
+  }
+  // Greetings
+  else if (message.includes("hi") || message.includes("hello") || message.includes("hey")) {
+    response = `🌸 <strong>Hello there!</strong> I'm your Women's Wellness Companion. How can I help you today?<br>
+    You can ask about:<br>
+    - Period or menstrual health<br>
+   - Pregnancy or menopause<br>
+    - PCOS or thyroid issues<br>
+    - Mental wellness<br>
+    - General health tips`;
+  }
+  // Thank you
+  else if (message.includes("thank") || message.includes("appreciate")) {
+    response = `💕 You're very welcome! I'm happy to help with your health questions anytime. Is there anything else you'd like to know?`;
+  }
+  // Default response
+  else {
+    response = `🤔 I'm not sure I understand. Could you try asking about a specific women's health topic? For example:<br>
+    - "What are common period symptoms?"<br>
+    - "How do I manage PCOS?"<br>
+    - "What are menopause symptoms?"<br>
+    - "Tips for UTI prevention"<br>
+    <br>I'm here to help with your health questions!`;
+  }
+  
+  addBotMessage(response);
+  
+  // Add a health tip after the response (30% chance)
+  if (Math.random() < 0.3) {
+    setTimeout(() => {
+      const tips = [
+        `<div class="health-tip"><strong>Did you know?</strong> Regular physical activity can help reduce PMS symptoms by up to 50% for many women.</div>`,
+        `<div class="health-tip"><strong>Wellness Tip:</strong> Keeping a symptom diary can help you and your doctor identify patterns in your health.</div>`,
+        `<div class="health-tip"><strong>Healthy Habit:</strong> Aim for 7-9 hours of quality sleep each night - it impacts everything from hormones to mood.</div>`,
+        `<div class="health-tip"><strong>Nutrition Note:</strong> Foods rich in omega-3s (like salmon, walnuts) may help reduce menstrual cramps.</div>`
+      ];
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+      addBotMessage(randomTip);
+    }, 500);
+  }
+}
+</script> </body> </html>

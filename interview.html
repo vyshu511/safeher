@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Preparation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #1e1e2f;
+      --secondary: #FF6B9E;
+      --accent: #dc7dff;
+      --white: #FFFFFF;
+      --text-color: #FFFFFF;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--primary);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--secondary);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .content-box {
+      background: var(--glass);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    h2, h3 {
+      color: var(--secondary);
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      background: transparent;
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--secondary);
+      color: var(--white);
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .light-mode {
+      --primary: #f9f9f9;
+      --text-color: #000000;
+      --glass: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Interview Preparation
+    <span class="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-adjust"></i>
+    </span>
+  </header>
+
+  <div class="container">
+    <div class="content-box">
+      <h2>Top Interview Tips</h2>
+      <ul>
+        <li>✅ Research the company thoroughly before the interview.</li>
+        <li>✅ Practice common technical and behavioral questions.</li>
+        <li>✅ Use the STAR method (Situation, Task, Action, Result) to structure answers.</li>
+        <li>✅ Dress appropriately and ensure your setup is professional (for virtual interviews).</li>
+        <li>✅ Prepare 2-3 thoughtful questions to ask the interviewer.</li>
+      </ul>
+    </div>
+
+    <div class="content-box">
+      <h2>Video Resources</h2>
+      <p>Watch these curated videos to enhance your interview skills:</p>
+
+      <h3>Technical Interview Prep</h3>
+      <iframe src="https://www.youtube.com/embed/8hly31xKli0" title="DSA Preparation" allowfullscreen></iframe>
+      <p><a href="https://www.youtube.com/watch?v=8hly31xKli0" target="_blank">Watch on YouTube</a></p>
+
+      <h3>Behavioral Interview Guide</h3>
+      <iframe src="https://www.youtube.com/embed/LYLxtMk9AEU" title="Behavioral Interview Questions" allowfullscreen></iframe>
+      <p><a href="https://www.youtube.com/watch?v=z2lZx1iZ4Wg" target="_blank">Watch on YouTube</a></p>
+
+      <h3>Mock Interview Walkthrough</h3>
+      <iframe src="https://www.youtube.com/embed/_tv7eFyqlhk" title="Mock Interview Session" allowfullscreen></iframe>
+      <p><a href="https://www.youtube.com/watch?v=CxrkX3xbFts" target="_blank">Watch on YouTube</a></p>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
+</body>
+</html>

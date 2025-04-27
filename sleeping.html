@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .input-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        input {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .results-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        #chart-container {
+            height: 350px;
+            margin-bottom: 20px;
+        }
+        
+        .analysis-report {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+        }
+        
+        .metric-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .metric-value {
+            font-weight: 700;
+        }
+        
+        .good {
+            color: var(--success);
+        }
+        
+        .warning {
+            color: var(--warning);
+        }
+        
+        .suggestions-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .suggestions-list {
+            padding-left: 20px;
+        }
+        
+        .suggestions-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .highlight {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .report-text {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sleep Tracker</h1>
+            <p>Track and analyze your weekly sleep patterns</p>
+        </header>
+        
+        <div class="input-section">
+            <h2>Enter Your Sleep Data</h2>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="monday">Monday</label>
+                    <input type="number" id="monday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="tuesday">Tuesday</label>
+                    <input type="number" id="tuesday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="wednesday">Wednesday</label>
+                    <input type="number" id="wednesday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="thursday">Thursday</label>
+                    <input type="number" id="thursday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="friday">Friday</label>
+                    <input type="number" id="friday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="saturday">Saturday</label>
+                    <input type="number" id="saturday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+                <div class="input-group">
+                    <label for="sunday">Sunday</label>
+                    <input type="number" id="sunday" min="0" max="24" step="0.5" placeholder="Hours">
+                </div>
+            </div>
+            <button id="analyze-btn">Generate Sleep Report</button>
+        </div>
+        
+        <div class="results-container">
+            <div class="card">
+                <h2>Sleep Graph</h2>
+                <div id="chart-container">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card analysis-report">
+                <h2>Analysis Report</h2>
+                <div id="metrics-container"></div>
+                <div id="report-container"></div>
+            </div>
+        </div>
+        
+        <div class="suggestions-section">
+            <h2>Sleep Improvement Suggestions</h2>
+            <div id="suggestions-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize chart
+            const ctx = document.getElementById('sleepChart').getContext('2d');
+            window.sleepChart = new Chart(ctx, {
+                type: 'bar',
+                data: { labels: [], datasets: [] },
+                options: getChartOptions()
+            });
+            
+            // Set up button click handler
+            document.getElementById('analyze-btn').addEventListener('click', generateReport);
+        });
+        
+        function generateReport() {
+            // Get sleep data from inputs
+            const sleepData = getSleepData();
+            
+            // Calculate metrics
+            const metrics = calculateMetrics(sleepData);
+            
+            // Update chart
+            updateChart(sleepData);
+            
+            // Update metrics display
+            updateMetrics(metrics);
+            
+            // Update analysis report
+            updateAnalysisReport(sleepData, metrics);
+            
+            // Update suggestions
+            updateSuggestions(sleepData, metrics);
+        }
+        
+        function getSleepData() {
+            return {
+                monday: parseFloat(document.getElementById('monday').value) || 0,
+                tuesday: parseFloat(document.getElementById('tuesday').value) || 0,
+                wednesday: parseFloat(document.getElementById('wednesday').value) || 0,
+                thursday: parseFloat(document.getElementById('thursday').value) || 0,
+                friday: parseFloat(document.getElementById('friday').value) || 0,
+                saturday: parseFloat(document.getElementById('saturday').value) || 0,
+                sunday: parseFloat(document.getElementById('sunday').value) || 0
+            };
+        }
+        
+        function calculateMetrics(data) {
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            const values = Object.values(data);
+            const avg = values.reduce((a, b) => a + b, 0) / 7;
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const minDay = days[values.indexOf(min)];
+            const maxDay = days[values.indexOf(max)];
+            
+            // Calculate consistency (lower stdDev = more consistent)
+            const stdDev = calculateStandardDeviation(values);
+            const consistency = Math.max(0, 10 - (stdDev * 2)).toFixed(1);
+            
+            // Calculate weekday/weekend difference
+            const weekdayAvg = (values[0] + values[1] + values[2] + values[3] + values[4]) / 5;
+            const weekendAvg = (values[5] + values[6]) / 2;
+            const weekendDiff = (weekendAvg - weekdayAvg).toFixed(1);
+            
+            return {
+                average: avg,
+                min: min,
+                max: max,
+                minDay: minDay,
+                maxDay: maxDay,
+                consistency: consistency,
+                weekdayAvg: weekdayAvg,
+                weekendAvg: weekendAvg,
+                weekendDiff: weekendDiff,
+                stdDev: stdDev
+            };
+        }
+        
+        function calculateStandardDeviation(values) {
+            const avg = values.reduce((a, b) => a + b, 0) / values.length;
+            const squareDiffs = values.map(val => Math.pow(val - avg, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+            return Math.sqrt(avgSquareDiff);
+        }
+        
+        function updateChart(data) {
+            const chartData = {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Hours of Sleep',
+                    data: Object.values(data),
+                    backgroundColor: [
+                        '#4361ee', '#4361ee', '#4361ee', '#4361ee', '#4361ee', 
+                        '#4cc9f0', '#4cc9f0'
+                    ],
+                    borderColor: [
+                        '#3a56d4', '#3a56d4', '#3a56d4', '#3a56d4', '#3a56d4', 
+                        '#3fbcdf', '#3fbcdf'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            };
+            
+            window.sleepChart.data = chartData;
+            window.sleepChart.update();
+        }
+        
+        function updateMetrics(metrics) {
+            const container = document.getElementById('metrics-container');
+            
+            const getQualityClass = (hours) => {
+                if (hours >= 7 && hours <= 9) return 'good';
+                if (hours < 6 || hours > 10) return 'warning';
+                return '';
+            };
+            
+            container.innerHTML = `
+                <div class="metric">
+                    <span class="metric-label">Average Sleep:</span>
+                    <span class="metric-value ${getQualityClass(metrics.average)}">${metrics.average.toFixed(1)} hours</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Minimum (${metrics.minDay}):</span>
+                    <span class="metric-value ${getQualityClass(metrics.min)}">${metrics.min} hours</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Maximum (${metrics.maxDay}):</span>
+                    <span class="metric-value ${getQualityClass(metrics.max)}">${metrics.max} hours</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Consistency Score:</span>
+                    <span class="metric-value">${metrics.consistency}/10</span>
+                </div>
+            `;
+        }
+        
+        function updateAnalysisReport(data, metrics) {
+            const container = document.getElementById('report-container');
+            const values = Object.values(data);
+            
+            let reportHTML = `
+                <p class="report-text">Your weekly sleep average of <span class="highlight">${metrics.average.toFixed(1)} hours</span> ${getSleepQualityText(metrics.average)}</p>
+                
+                <p class="report-text">Your most restful night was <span class="highlight">${metrics.maxDay}</span> with <span class="highlight">${metrics.max} hours</span>, 
+                while your shortest sleep was <span class="highlight">${metrics.min} hours</span> on <span class="highlight">${metrics.minDay}</span>.</p>
+                
+                <p class="report-text">Your sleep consistency score of <span class="highlight">${metrics.consistency}/10</span> indicates ${getConsistencyText(metrics.consistency)}</p>
+            `;
+            
+            // Add weekend/weekday analysis if significant difference
+            if (Math.abs(metrics.weekendDiff) >= 1) {
+                reportHTML += `
+                    <p class="report-text">You sleep <span class="highlight">${Math.abs(metrics.weekendDiff)} hours ${metrics.weekendDiff > 0 ? 'more' : 'less'}</span> on weekends compared to weekdays, 
+                    ${getWeekendDifferenceText(metrics.weekendDiff)}</p>
+                `;
+            }
+            
+            container.innerHTML = reportHTML;
+        }
+        
+        function updateSuggestions(data, metrics) {
+            const container = document.getElementById('suggestions-container');
+            const values = Object.values(data);
+            let suggestions = [];
+            
+            // Average sleep suggestions
+            if (metrics.average < 7) {
+                suggestions.push("Prioritize getting at least 7 hours of sleep nightly to avoid sleep debt.");
+            } else if (metrics.average > 9) {
+                suggestions.push("While you're getting sufficient sleep, consistently sleeping more than 9 hours may indicate oversleeping. Consider setting a consistent wake-up time.");
+            }
+            
+            // Minimum sleep day suggestions
+            if (metrics.min < 6) {
+                suggestions.push(`On ${metrics.minDay}s, aim to add at least 1-2 hours of sleep to reach the recommended minimum. Examine what activities are cutting into your sleep time.`);
+            } else if (metrics.min < 7) {
+                suggestions.push(`Try adding 30 minutes to your ${metrics.minDay} sleep schedule to reach the recommended 7-hour minimum.`);
+            }
+            
+            // Consistency suggestions
+            if (metrics.consistency < 6) {
+                suggestions.push("Your sleep schedule varies significantly. Try going to bed and waking up at the same time (±1 hour) every day, even on weekends.");
+            } else if (metrics.consistency < 8) {
+                suggestions.push("Your sleep schedule has moderate variation. Aim to reduce differences between your earliest and latest bedtimes.");
+            }
+            
+            // Weekend catch-up suggestions
+            if (metrics.weekendDiff > 1.5) {
+                suggestions.push("The significant weekend sleep-in may indicate weekday sleep deprivation. Try distributing your sleep more evenly through the week.");
+            }
+            
+            // General sleep hygiene suggestions
+            suggestions.push(
+                "Establish a relaxing bedtime routine 30-60 minutes before sleep (reading, meditation, light stretching).",
+                "Avoid screens (phones, TVs, computers) for at least 30 minutes before bedtime as blue light can disrupt sleep.",
+                "Keep your bedroom cool, dark and quiet for optimal sleep conditions.",
+                "Limit caffeine intake after 2pm and avoid heavy meals close to bedtime.",
+                "Get regular exercise, but avoid vigorous activity within 3 hours of bedtime."
+            );
+            
+            container.innerHTML = `
+                <ul class="suggestions-list">
+                    ${suggestions.map(s => `<li>${s}</li>`).join('')}
+                </ul>
+            `;
+        }
+        
+        function getSleepQualityText(average) {
+            if (average >= 7 && average <= 9) return "falls within the recommended 7-9 hour range for adults.";
+            if (average < 7) return "is below the recommended amount, which may lead to daytime fatigue and health risks.";
+            return "is above the recommended amount, which may indicate oversleeping or low sleep quality.";
+        }
+        
+        function getConsistencyText(score) {
+            if (score >= 8) return "excellent consistency in your sleep schedule.";
+            if (score >= 6) return "moderate consistency, with room for improvement.";
+            return "significant variation in your sleep times, which can disrupt your circadian rhythm.";
+        }
+        
+        function getWeekendDifferenceText(diff) {
+            if (diff > 2) return "a pattern known as 'social jetlag' that can negatively impact your circadian rhythm.";
+            if (diff > 1) return "a common but not ideal pattern that may contribute to 'Monday fatigue'.";
+            return "a relatively small difference that helps maintain consistent energy levels.";
+        }
+        
+        function getChartOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' hours';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Hours of Sleep',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        max: 12,
+                        grid: {
+                            color: '#e9ecef'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+</html>

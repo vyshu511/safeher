@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Wellness</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Navigation Bar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #4CAF50;
+    }
+
+    /* Home Section with Video */
+    .main-content {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .main-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .main-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .main-text {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .main-text h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .main-text p {
+      font-size: 20px;
+      max-width: 600px;
+    }
+
+    /* Auth Section */
+    .auth-section {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+    }
+
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .video-background video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.85);
+      z-index: 2;
+    }
+
+    .auth-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      z-index: 3;
+    }
+
+    .auth-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .auth-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-bottom: 15px;
+    }
+
+    .auth-btn:hover {
+      background-color: #45a049;
+    }
+
+    .switch-auth {
+      color: #555;
+      text-decoration: none;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .switch-auth:hover {
+      text-decoration: underline;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+      z-index: 4;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Yoga Wellness</div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-home">Home</a></li>
+      <li><a href="#" class="nav-about">About Us</a></li>
+      <li><a href="#" class="nav-login">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Section with Video -->
+  <div class="main-content" id="mainContent">
+    <video autoplay muted loop class="main-video-bg">
+      <source src="https://cdn.pixabay.com/video/2023/06/16/167505-837077523_tiny.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="main-overlay"></div>
+    <div class="main-text">
+      <h1>Welcome to Yoga Wellness</h1>
+      <p>Discover peace and harmony through our yoga programs.</p>
+    </div>
+  </div>
+
+  <!-- Auth Section -->
+  <div class="auth-section" id="authSection">
+    <div class="video-background">
+      <video autoplay muted loop>
+        <source src="https://cdn.pixabay.com/video/2023/11/30/191439-890134783_tiny.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+    </div>
+
+    <!-- Close Button -->
+    <div class="close-btn" id="closeAuth">×</div>
+
+    <!-- Login Form -->
+    <div class="auth-container" id="loginFormContainer">
+      <h2>Welcome Back</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" required />
+        </div>
+        <div class="input-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required />
+        </div>
+        <button type="submit" class="auth-btn">Login</button>
+        <a href="#" class="switch-auth" id="showSignup">Don't have an account? Sign up</a>
+      </form>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="auth-container hidden" id="signupFormContainer">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <div class="input-group">
+          <label for="signup-username">Username</label>
+          <input type="text" id="signup-username" required />
+        </div>
+        <div class="input-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" required />
+        </div>
+        <div class="input-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" required />
+        </div>
+        <div class="input-group">
+          <label for="signup-confirm-password">Confirm Password</label>
+          <input type="password" id="signup-confirm-password" required />
+        </div>
+        <button type="submit" class="auth-btn">Sign Up</button>
+        <a href="#" class="switch-auth" id="showLogin">Already have an account? Login</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Yoga Wellness. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const navLogin = document.querySelector('.nav-login');
+    const navHome = document.querySelector('.nav-home');
+    const navAbout = document.querySelector('.nav-about');
+    const authSection = document.getElementById('authSection');
+    const mainContent = document.getElementById('mainContent');
+    const closeAuth = document.getElementById('closeAuth');
+
+    navLogin.addEventListener('click', function(e) {
+      e.preventDefault();
+      authSection.style.display = 'block';
+      mainContent.style.display = 'none';
+    });
+
+    navHome.addEventListener('click', function(e) {
+      e.preventDefault();
+      authSection.style.display = 'none';
+      mainContent.style.display = 'block';
+    });
+
+    navAbout.addEventListener('click', function(e) {
+      e.preventDefault();
+      authSection.style.display = 'none';
+      mainContent.innerHTML = `
+        <div class="main-overlay"></div>
+        <div class="main-text">
+          <h1>About Yoga Wellness</h1>
+          <p>We are dedicated to helping you find balance through yoga and meditation.</p>
+        </div>
+      `;
+    });
+
+    closeAuth.addEventListener('click', function() {
+      authSection.style.display = 'none';
+      mainContent.style.display = 'block';
+    });
+
+    document.getElementById('showSignup').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('loginFormContainer').classList.add('hidden');
+      document.getElementById('signupFormContainer').classList.remove('hidden');
+    });
+
+    document.getElementById('showLogin').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('signupFormContainer').classList.add('hidden');
+      document.getElementById('loginFormContainer').classList.remove('hidden');
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      if(username && password) {
+        window.location.href = 'indexp.html';
+      } else {
+        alert('Please enter both username and password');
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('signup-username').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      if(!username || !email || !password || !confirmPassword) {
+        alert('Please fill all fields');
+        return;
+      }
+      if(password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+      alert('Account created successfully! Please login.');
+      document.getElementById('signupFormContainer').classList.add('hidden');
+      document.getElementById('loginFormContainer').classList.remove('hidden');
+      document.getElementById('signupForm').reset();
+    });
+  </script>
+</body>
+</html>

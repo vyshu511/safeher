@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta ch
+arset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Defense Mastery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --primary: #0f0f13;
+    --secondary: #ff4d6d;
+    --accent: #7b8cde;
+    --white: #fff;
+    --light: #f8f9fa;
+    --dark: #0a0a0b;
+    --glass: rgba(20, 22, 27, 0.92);
+    --border-radius: 22px;
+    --border-radius-sm: 12px;
+    --shadow: 0 6px 36px 0 rgba(0, 0, 0, 0.25);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    background: var(--primary);
+    color: var(--white);
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.1) 0px, transparent 50%);
+    transition: var(--transition);
+}
+
+body.light-mode {
+    --primary: #f0f2f5;
+    --white: #0a0a0b;
+    --light: #0a0a0b;
+    --dark: #f8f9fa;
+    --glass: rgba(255, 255, 255, 0.92);
+    background-image: 
+        radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.05) 0px, transparent 50%);
+}
+
+.site-title {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.site-title span {
+    color: var(--secondary);
+    position: relative;
+}
+
+.site-title span::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--secondary);
+    border-radius: 2px;
+}
+
+/* Navigation */
+nav {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin: 24px auto 0;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.light-mode nav {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 12px;
+    padding: 0 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--light);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background: var(--secondary);
+    color: var(--white);
+    box-shadow: 0 4px 20px 0 rgba(255, 77, 109, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Feature Cards */
+.features-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 20px;
+}
+
+.feature-card {
+    background: var(--glass);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.light-mode .feature-card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.3);
+    border-color: var(--secondary);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
+}
+
+.feature-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+}
+
+.feature-desc {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+body.light-mode .feature-desc {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--secondary);
+    color: var(--white);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.btn:hover {
+    background: #8c1494;
+    box-shadow: 0 4px 16px 0 rgba(255, 77, 205, 0.4);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: var(--glass);
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 800px;
+    border: 1px solid var(--secondary);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--secondary);
+}
+
+.modal-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--secondary);
+}
+
+.modal-body {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+body.light-mode .modal-body {
+    color: rgba(0, 0, 0, 0.9);
+}
+
+/* Loading Spinner */
+.spinner {
+    display: none;
+    margin: 20px auto;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--secondary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+body.light-mode .spinner {
+    border: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Video Container Styles */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 20px;
+    background: #000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.video-info {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+
+body.light-mode .video-info {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.video-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--white);
+}
+
+.video-desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+body.light-mode .video-desc {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Toggle Switch */
+.theme-switch-wrapper {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: var(--glass);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode .slider {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.slider:before {
+    background-color: var(--secondary);
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: var(--transition);
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color: var(--glass);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.theme-icon {
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 2.2rem;
+    }
+    
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .theme-switch-wrapper {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 1.8rem;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .nav-links li a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* New styles for better content visibility */
+.tip-card {
+    background: rgba(255,255,255,0.05) !important;
+    padding: 20px !important;
+    border-radius: var(--border-radius-sm) !important;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+body.light-mode .tip-card {
+    background: rgba(0,0,0,0.05) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+.technique-container {
+    padding: 15px;
+}
+
+.modal-body ul {
+    padding-left: 25px;
+    margin-bottom: 15px;
+}
+
+.modal-body li {
+    margin-bottom: 10px;
+    color: rgba(255,255,255,0.9);
+}
+
+body.light-mode .modal-body li {
+    color: rgba(0,0,0,0.9);
+}
+
+.text-input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--border-radius-sm);
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+body.light-mode .text-input {
+    background: rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.2);
+    color: var(--dark);
+}
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-switch-wrapper">
+        <span class="theme-icon"><i class="fas fa-moon"></i></span>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+        <span class="theme-icon"><i class="fas fa-sun"></i></span>
+    </div>
+
+    <!-- Title Above Nav -->
+    <div class="site-title">Self <span>Defense</span> Mastery</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="navbar">
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="#"><i class="fas fa-phone-alt"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Feature Cards -->
+    <div class="features-container">
+        <!-- Self-Defense Techniques Card -->
+        <div class="feature-card" onclick="loadFeature('techniques')">
+            <div class="feature-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="feature-title">Self-Defense Techniques</h3>
+            <p class="feature-desc">Interactive visual guide with step-by-step instructions for essential self-defense moves.</p>
+            <button class="btn">Explore Techniques</button>
+        </div>
+        
+        <!-- Safety Tips Card -->
+        <div class="feature-card" onclick="loadFeature('tips')">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Safety Tips</h3>
+            <p class="feature-desc">Practical advice for staying safe in various situations, from parking lots to public transport.</p>
+            <button class="btn">View Tips</button>
+        </div>
+        
+        <!-- Emergency Plan Card -->
+        <div class="feature-card" onclick="loadFeature('emergency')">
+            <div class="feature-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="feature-title">Emergency Plan</h3>
+            <p class="feature-desc">Create your personalized emergency action plan and find local training resources.</p>
+            <button class="btn">Get Prepared</button>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal" id="featureModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title" id="modalTitle">Feature Title</h2>
+            <div class="spinner" id="loadingSpinner"></div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Feature data - acts as our "backend"
+        const features = {
+            techniques: {
+                title: "Self-Defense Techniques for Women",
+                content: `
+                    <div class="technique-container">
+                        <h3 style="color: var(--accent); margin-bottom: 25px; text-align: center;">Essential Self-Defense Techniques for Women</h3>
+                        
+                        <!-- Technique 1 -->
+                        <div style="margin-bottom: 40px;">
+                            <h4 style="color: var(--white); margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: var(--secondary); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;">1</span>
+                                Basic Self-Defense Introduction for Women
+                            </h4>
+                            
+                            <div class="video-container">
+                                <iframe width="100%" height="100%" 
+                                        src="https://www.youtube.com/embed/T7aNSRoDCmg" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h5 class="video-title">5 Self Defense Moves Every Woman Should Know</h5>
+                                <p class="video-desc">Learn fundamental self-defense techniques specifically designed for women, including how to use your body's natural weapons effectively.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Technique 2 -->
+                        <div style="margin-bottom: 40px;">
+                            <h4 style="color: var(--white); margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: var(--secondary); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;">2</span>
+                                Wrist Release Technique
+                            </h4>
+                            
+                            <div class="video-container">
+                                <iframe width="100%" height="100%" 
+                                        src="https://www.youtube.com/embed/LoEHxqX3k3c" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h5 class="video-title">How to Escape Wrist Grabs</h5>
+                                <p class="video-desc">Master these simple yet effective techniques to break free from wrist grabs using leverage rather than strength.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Technique 3 -->
+                        <div style="margin-bottom: 40px;">
+                            <h4 style="color: var(--white); margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: var(--secondary); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;">3</span>
+                                Front Choke Defense
+                            </h4>
+                            
+                            <div class="video-container">
+                                <iframe width="100%" height="100%" 
+                                        src="https://www.youtube.com/embed/K5UO9zA3GK4" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h5 class="video-title">Defending Against Chokes</h5>
+                                <p class="video-desc">Learn how to protect your airway and break free from front choke holds with this life-saving technique.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Technique 4 -->
+                        <div style="margin-bottom: 40px;">
+                            <h4 style="color: var(--white); margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="background: var(--secondary); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px;">4</span>
+                                Ground Defense Techniques
+                            </h4>
+                            
+                            <div class="video-container">
+                                <iframe width="100%" height="100%" 
+                                        src="https://www.youtube.com/embed/KVpxP3ZZtAc" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="video-info">
+                                <h5 class="video-title">Ground Defense for Women</h5>
+                                <p class="video-desc">Essential techniques to defend yourself if you end up on the ground, including how to create space and get back up safely.</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(123, 140, 222, 0.1); padding: 20px; border-radius: var(--border-radius-sm); border-left: 4px solid var(--accent); margin-top: 30px;">
+                            <h4 style="color: var(--accent); margin-bottom: 10px;">Practice Tips:</h4>
+                            <ul style="color: rgba(255,255,255,0.8); padding-left: 20px;">
+                                <li style="margin-bottom: 8px;">Practice each technique slowly at first, then increase speed</li>
+                                <li style="margin-bottom: 8px;">Train with a partner to get realistic feedback</li>
+                                <li style="margin-bottom: 8px;">Visualize using these techniques in different scenarios</li>
+                                <li>Consider taking a local self-defense class for hands-on instruction</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            tips: {
+                title: "Safety Tips & Strategies",
+                content: `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="tip-card">
+                            <h4 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-walking"></i> Walking Alone</h4>
+                            <ul>
+                                <li>Stay in well-lit areas</li>
+                                <li>Keep headphones volume low</li>
+                                <li>Vary your routine</li>
+                                <li>Have your keys ready before reaching your destination</li>
+                                <li>Walk with confidence and purpose</li>
+                                <li>Be aware of escape routes</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-car"></i> Vehicle Safety</h4>
+                            <ul>
+                                <li>Check back seat before entering</li>
+                                <li>Lock doors immediately</li>
+                                <li>Park near surveillance cameras</li>
+                                <li>Keep valuables out of sight</li>
+                                <li>Have keys ready when approaching your car</li>
+                                <li>If followed, drive to a police station</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-home"></i> Home Security</h4>
+                            <ul>
+                                <li>Install motion-sensor lights</li>
+                                <li>Use timers for lights when away</li>
+                                <li>Don't hide spare keys outside</li>
+                                <li>Get to know your neighbors</li>
+                                <li>Keep bushes trimmed near windows</li>
+                                <li>Always lock doors and windows</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <h4 style="color: var(--accent); margin-bottom: 10px;"><i class="fas fa-users"></i> Social Situations</h4>
+                            <ul>
+                                <li>Watch your drink at all times</li>
+                                <li>Have a code word with friends</li>
+                                <li>Trust your instincts</li>
+                                <li>Practice assertive communication</li>
+                                <li>Meet first dates in public places</li>
+                                <li>Share your location with trusted contacts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; background: rgba(255,77,109,0.1); padding: 20px; border-radius: var(--border-radius-sm); border-left: 4px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Remember:</h4>
+                        <p style="color: rgba(255,255,255,0.9);">Your safety is more important than being polite. It's okay to make a scene if you feel threatened. Trust your instincts - if something feels wrong, it probably is.</p>
+                    </div>
+                `
+            },
+            emergency: {
+                title: "Emergency Action Plan",
+                content: `
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: var(--accent); margin-bottom: 15px;">Create Your Personal Plan</h3>
+                        
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <h4 style="color: var(--white); margin-bottom: 10px;">1. Safe Places</h4>
+                                <textarea id="safePlaces" placeholder="Identify safe places along your daily routes (police stations, open businesses, etc.)" 
+                                          class="text-input">${localStorage.getItem('safePlaces') || ''}</textarea>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 300px;">
+                                <h4 style="color: var(--white); margin-bottom: 10px;">2. Emergency Contacts</h4>
+                                <textarea id="emergencyContacts" placeholder="List contacts you can call in an emergency (local police, trusted friends/family)" 
+                                          class="text-input">${localStorage.getItem('emergencyContacts') || ''}</textarea>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <h4 style="color: var(--white); margin-bottom: 10px;">3. Emergency Numbers</h4>
+                            <input type="text" id="emergencyNumbers" placeholder="Local police, security, etc." 
+                                   class="text-input" value="${localStorage.getItem('emergencyNumbers') || ''}">
+                        </div>
+                        
+                        <button class="btn" onclick="savePlan()" style="margin-top: 10px;">
+                            <i class="fas fa-save"></i> Save My Plan
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 15px;">Find Local Training</h3>
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <input type="text" id="locationInput" placeholder="Enter your location (city or zip)" 
+                                   class="text-input" style="flex: 1; min-width: 200px;">
+                            <button class="btn" onclick="findTraining()">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        
+                        <div id="trainingResults" style="margin-top: 20px;">
+                            <!-- Results will appear here -->
+                            <p style="color: rgba(255,255,255,0.6);">Enter your location to find certified self-defense classes near you.</p>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Function to load feature content
+        function loadFeature(feature) {
+            const modal = document.getElementById('featureModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const spinner = document.getElementById('loadingSpinner');
+            
+            // Show modal and loading spinner
+            modal.style.display = 'block';
+            modalBody.innerHTML = '';
+            spinner.style.display = 'block';
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Get the feature data from our "database"
+                const featureData = features[feature];
+                
+                // Update modal content
+                modalTitle.textContent = featureData.title;
+                modalBody.innerHTML = featureData.content;
+                
+                // Hide spinner
+                spinner.style.display = 'none';
+            }, 500); // Half second delay to simulate loading
+        }
+        
+        // Function to save emergency plan to local storage
+        function savePlan() {
+            const safePlaces = document.getElementById('safePlaces').value;
+            const emergencyContacts = document.getElementById('emergencyContacts').value;
+            const emergencyNumbers = document.getElementById('emergencyNumbers').value;
+            
+            // Save to local storage
+            localStorage.setItem('safePlaces', safePlaces);
+            localStorage.setItem('emergencyContacts', emergencyContacts);
+            localStorage.setItem('emergencyNumbers', emergencyNumbers);
+            
+            alert('Emergency plan saved successfully! It will be available next time you visit.');
+        }
+        
+        // Function to find training (simulated)
+        function findTraining() {
+            const location = document.getElementById('locationInput').value;
+            const results = document.getElementById('trainingResults');
+            
+            if (!location) {
+                alert('Please enter a location');
+                return;
+            }
+            
+            results.innerHTML = '<p style="color: var(--white);">Searching for classes near ' + location + '...</p>';
+            
+            // Simulate API call with timeout
+            setTimeout(() => {
+                results.innerHTML = `
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: var(--border-radius-sm);">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Results for ${location}:</h4>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <strong>Women's Self-Defense Academy</strong><br>
+                                <span style="color: rgba(255,255,255,0.7);">123 Safety St, ${location}</span><br>
+                                <span style="color: var(--secondary);">Specializes in practical self-defense for women</span><br>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; margin-top: 5px;">View Details</button>
+                            </li>
+                            <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <strong>Empowerment Defense Training</strong><br>
+                                <span style="color: rgba(255,255,255,0.7);">456 Protection Ave, ${location}</span><br>
+                                <span style="color: var(--secondary);">Free introductory classes available</span><br>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; margin-top: 5px;">View Details</button>
+                            </li>
+                            <li>
+                                <strong>Community Self-Defense Center</strong><br>
+                                <span style="color: rgba(255,255,255,0.7);">789 Defense Blvd, ${location}</span><br>
+                                <span style="color: var(--secondary);">Offers women-only classes</span><br>
+                                <button class="btn" style="padding: 5px 10px; font-size: 0.8rem; margin-top: 5px;">View Details</button>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+            }, 1500);
+        }
+        
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('featureModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById('featureModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Theme Toggle Functionality
+        const toggleSwitch = document.querySelector('#theme-toggle');
+        
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        toggleSwitch.addEventListener('change', switchTheme, false);
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            document.body.classList.add(currentTheme + '-mode');
+            if (currentTheme === 'light') {
+                toggleSwitch.checked = true;
+            }
+        }
+    </script>
+</body>
+</html>

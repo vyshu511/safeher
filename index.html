@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeHer - Campus Safety & Wellness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light Theme */
+            --primary-light: #FFFFFF;
+            --secondary-light: #FF6B9E;
+            --accent-light: #dc7dff;
+            --success-light: #642fd5;
+            --dark-light: #F5F5F5;
+            --light-light: #E0E0E0;
+            --text-light: #333333;
+            --glass-light: rgba(255, 255, 255, 0.86);
+            --border-radius: 20px;
+            --shadow-light: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+           
+            /* Dark Theme */
+            --primary-dark: #0D071C;
+            --secondary-dark: #FF6B9E;
+            --accent-dark: #dc7dff;
+            --success-dark: #642fd5;
+            --dark-dark: #1A103D;
+            --light-dark: #2A1B4D;
+            --text-dark: #FFFFFF;
+            --glass-dark: rgba(26, 16, 61, 0.86);
+            --shadow-dark: 0 8px 32px 0 rgba(106, 76, 147, 0.24);
+           
+            /* Current Theme Variables (default to light) */
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --accent: var(--accent-light);
+            --success: var(--success-light);
+            --dark: var(--dark-light);
+            --light: var(--light-light);
+            --text: var(--text-light);
+            --glass: var(--glass-light);
+            --shadow: var(--shadow-light);
+            --hero-gradient: linear-gradient(135deg, var(--dark-light) 65%, var(--primary-light) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60px;
+            height: 30px;
+            background: var(--light);
+            border-radius: 30px;
+            padding: 0 5px;
+            cursor: pointer;
+            border: 1px solid var(--secondary);
+        }
+
+        .theme-toggle i {
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .toggle-ball {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: var(--secondary);
+            border-radius: 50%;
+            left: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .dark-mode .toggle-ball {
+            transform: translateX(30px);
+        }
+
+        /* NAVIGATION */
+        nav {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1.5px solid var(--light);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--text);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                flex-direction: column;
+                position: fixed;
+                left: -100vw;
+                top: 65px;
+                width: 100vw;
+                background: var(--primary);
+                backdrop-filter: blur(16px);
+                transition: left 0.3s;
+                box-shadow: 0 2px 16px rgba(106, 76, 147, 0.05);
+                padding-top: 28px;
+                min-height: 100vh;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 14px 0;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: var(--hero-gradient);
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 75px;
+            position: relative;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-content {
+          
+            padding: 48px 32px 40px 32px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 32px 0 rgba(106, 76, 147, 0.23);
+            margin: 0 auto;
+            max-width: 650px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            color: var(--primary);
+            padding: 13px 35px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.08rem;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            box-shadow: 0 2px 12px 0 rgba(255, 107, 158, 0.18);
+            transition: background 0.22s, transform 0.2s, box-shadow 0.18s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 18px 0 rgba(255, 107, 158, 0.22);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            font-weight: 700;
+            transition: all 0.18s;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 80px 0 60px;
+            background: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 2.3rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .section-title p {
+            color: var(--text);
+            margin: 0 auto;
+            font-size: 1.08rem;
+            max-width: 420px;
+            line-height: 1.5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 34px;
+        }
+
+        .feature-card {
+            background: var(--primary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.22s, box-shadow 0.22s;
+            cursor: pointer;
+            border: 1.5px solid var(--light);
+            overflow: hidden;
+            min-height: 345px;
+            display: flex;
+            flex-direction: column;
+            justify-content: stretch;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px) scale(1.035);
+            box-shadow: 0 8px 36px 0 rgba(106, 76, 147, 0.23);
+        }
+
+        .feature-link {
+            display: block;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .feature-icon {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.7rem;
+            color: white;
+            border-bottom: 2px solid var(--light);
+        }
+
+        /* Emergency Alert - Vibrant Pink-Purple */
+        .feature-icon.emergency {
+            background: linear-gradient(135deg, #690f37, #b66573);
+            box-shadow: 0 4px 15px rgba(255, 15, 123, 0.3);
+        }
+
+        /* Wellness - Soft Peach-Yellow */
+        .feature-icon.wellness {
+            background: linear-gradient(135deg, #97ad3f, #e9e08f);
+            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+        }
+
+        /* Self-Defense - Earthy Green-Purple */
+        .feature-icon.defense {
+            background: linear-gradient(135deg, #00B09B, #6A3093);
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.3);
+        }
+
+        /* Career - Professional Purple-Teal */
+        .feature-icon.career {
+            background: linear-gradient(135deg, #6A3093, #4CA1AF);
+            box-shadow: 0 4px 15px rgba(106, 48, 147, 0.3);
+        }
+
+        /* Sleeping Analysis - Dreamy Lavender-Yellow */
+        .feature-icon.sleep {
+            background: linear-gradient(135deg, #E100FF, #FFFC00);
+            box-shadow: 0 4px 15px rgba(225, 0, 255, 0.3);
+        }
+
+        /* Chatbot Support - Electric Green-Pink */
+        .feature-icon.chatbot {
+            background: linear-gradient(135deg, #8918a2, #FF00E4);
+            box-shadow: 0 4px 15px rgba(0, 255, 135, 0.3);
+        }
+
+        .feature-content {
+            padding: 26px 26px 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .feature-content h3 {
+            font-size: 1.21rem;
+            margin-bottom: 13px;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .feature-content p {
+            color: var(--text);
+            font-size: 1.01rem;
+            flex-grow: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: var(--text);
+            padding: 55px 0 23px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin-top: 50px;
+            box-shadow: 0 -2px 16px 0 rgba(106, 76, 147, 0.19);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 35px;
+            margin-bottom: 28px;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            font-size: 1.13rem;
+            background: var(--dark);
+            padding: 7px 13px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-bottom: 13px;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.18s;
+            font-size: 1rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-column p {
+            color: var(--text);
+            font-size: 0.99rem;
+            margin-bottom: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 13px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 1.12rem;
+            transition: background 0.18s, transform 0.18s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-4px) scale(1.07);
+            color: var(--primary);
+        }
+
+        .footer-column ul li i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1.5px solid rgba(219, 31, 194, 0.09);
+            color: var(--text);
+            font-size: 1rem;
+            padding-top: 16px;
+            opacity: 0.85;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --accent: var(--accent-dark);
+            --success: var(--success-dark);
+            --dark: var(--dark-dark);
+            --light: var(--light-dark);
+            --text: var(--text-dark);
+            --glass: var(--glass-dark);
+            --shadow: var(--shadow-dark);
+            --hero-gradient: linear-gradient(135deg, var(--dark-dark) 65%, var(--primary-dark) 100%);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+                padding: 18px 0;
+                border-radius: 0;
+            }
+
+            .hero-content {
+                padding: 30px 12px;
+            }
+
+            .features {
+                padding: 38px 0 26px;
+            }
+
+            .footer-content {
+                gap: 16px;
+            }
+
+            .footer-column h3 {
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 1.55rem;
+            }
+
+            .btn,
+            .btn-outline {
+                font-size: 0.99rem;
+                padding: 11px 16px;
+            }
+
+            .feature-icon {
+                height: 100px;
+                font-size: 2rem;
+            }
+
+            .feature-content h3 {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    SafeHer
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <div class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                            <span class="toggle-ball"></span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Empowering College Women</h1>
+                <p>A comprehensive platform for safety, wellness, and growth designed specifically for B.Tech female students navigating campus life.</p>
+                <div class="hero-buttons">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Features</h2>
+                <p>Designed with your safety, wellness, and growth in mind</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 - Emergency Alert -->
+                <div class="feature-card">
+                    <a href="emergency.html" class="feature-link">
+                        <div class="feature-icon emergency">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Emergency Alert System</h3>
+                            <p>Instant help when you need it most with one-tap emergency features</p>
+                        </div>
+                    </a>
+                </div>
+               
+                <!-- Feature 2 - Wellness -->
+                <div class="feature-card">
+                    <a href="indexp.html" class="feature-link">
+                        <div class="feature-icon wellness">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Mind & Body Wellness</h3>
+                            <p>Tools to support your mental and physical well-being</p>
+                        </div>
+                    </a>
+                </div>
+               
+                <!-- Feature 3 - Self-Defense -->
+                <div class="feature-card">
+                    <a href="defence.html" class="feature-link">
+                        <div class="feature-icon defense">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Self-Defense Resources</h3>
+                            <p>Learn techniques and connect with self-defense training</p>
+                        </div>
+                    </a>
+                </div>
+               
+                <!-- Feature 4 - Career -->
+                <div class="feature-card">
+                    <a href="career.html" class="feature-link">
+                        <div class="feature-icon career">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Career & Confidence</h3>
+                            <p>Boost your skills and prepare for your future</p>
+                        </div>
+                    </a>
+                </div>
+               
+                <!-- Feature 5 - Sleeping Analysis -->
+                <div class="feature-card">
+                    <a href="sleeping.html" class="feature-link">
+                        <div class="feature-icon sleep">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Sleeping Analysis</h3>
+                            <p>Track and improve your sleep patterns for better health</p>
+                        </div>
+                    </a>
+                </div>
+               
+                <!-- Feature 6 - Chatbot Support -->
+                <div class="feature-card">
+                    <a href="chatbot.html" class="feature-link">
+                        <div class="feature-icon chatbot">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Chatbot Support</h3>
+                            <p>24/7 AI assistance for your questions and concerns</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        
+            <div class="copyright">
+                <p>&copy; 2023 SafeHer. All rights reserved.</p>
+            
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+       
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+           
+            // Save theme preference
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

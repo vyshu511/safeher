@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga Pranayama Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      opacity: 0.25;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+      color: #333;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(5px);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      color: #4e342e;
+    }
+
+    .pranayama-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 30px 50px;
+      background-color: rgba(255, 248, 225, 0.8);
+    }
+
+    .pranayama-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .pranayama-card:hover {
+      transform: scale(1.03);
+    }
+
+    .pranayama-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .pranayama-card h3 {
+      color: #e65100;
+      margin-bottom: 10px;
+    }
+
+    .hidden-details {
+      display: none;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #5d4037;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .pranayama-grid {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop class="video-background">
+    <source src="https://cdn.pixabay.com/video/2018/11/09/17656-296974408_tiny.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <h1>🌬️ Pranayama for Energy & Calm</h1>
+    <p>Explore ancient breathing techniques to energize your life and bring inner peace.</p>
+  </header>
+
+  <div class="pranayama-grid">
+
+    <!-- Nadi Shodhana -->
+    <div class="pranayama-card" onclick="toggleDetails('nadi')">
+      <img src="https://th.bing.com/th/id/OIP.BZB9n52aBCpiloMDL47ZJQHaE8" alt="Nadi Shodhana" />
+      <h3>Nadi Shodhana</h3>
+      <div id="nadi-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Alternate Nostril Breathing</p>
+        <p><span class="highlight">Benefits:</span> Reduces stress, balances energy.</p>
+        <p><span class="highlight">Steps:</span> Inhale left, exhale right, and alternate.</p>
+        <p><span class="highlight">Duration:</span> 5–10 minutes.</p>
+      </div>
+    </div>
+
+    <!-- Bhastrika -->
+    <div class="pranayama-card" onclick="toggleDetails('bhastrika')">
+      <img src="https://th.bing.com/th?q=Bhastrika+Pranayama+Supine+Position&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-IN&cc=IN&setlang=en&adlt=strict&t=1&mw=247" alt="Bhastrika" />
+      <h3>Bhastrika</h3>
+      <div id="bhastrika-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Bellows Breath</p>
+        <p><span class="highlight">Benefits:</span> Boosts vitality and focus.</p>
+        <p><span class="highlight">Steps:</span> Fast inhale and exhale through nose.</p>
+        <p><span class="highlight">Duration:</span> 1–2 minutes.</p>
+      </div>
+    </div>
+
+    <!-- Kapalabhati -->
+    <div class="pranayama-card" onclick="toggleDetails('kapalabhati')">
+      <img src="https://th.bing.com/th/id/OIP.r4YWDDMeqEg_ZEqCL6EzZwHaFg?w=230&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Kapalabhati" />
+      <h3>Kapalabhati</h3>
+      <div id="kapalabhati-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Skull Shining Breath</p>
+        <p><span class="highlight">Benefits:</span> Detoxification and brain clarity.</p>
+        <p><span class="highlight">Steps:</span> Passive inhale, forceful exhale.</p>
+        <p><span class="highlight">Duration:</span> 3 rounds of 30 pumps.</p>
+      </div>
+    </div>
+
+    <!-- Bhramari -->
+    <div class="pranayama-card" onclick="toggleDetails('bhramari')">
+      <img src="data:image/jpeg;base64,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" alt="Bhramari" />
+      <h3>Bhramari</h3>
+      <div id="bhramari-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Humming Bee Breath</p>
+        <p><span class="highlight">Benefits:</span> Calms nerves and mind.</p>
+        <p><span class="highlight">Steps:</span> Exhale with a humming sound.</p>
+        <p><span class="highlight">Duration:</span> 5–10 breaths.</p>
+      </div>
+    </div>
+
+    <!-- Sheetali -->
+    <div class="pranayama-card" onclick="toggleDetails('sheetali')">
+      <img src="data:image/jpeg;base64,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" alt="Sheetali" />
+      <h3>Sheetali</h3>
+      <div id="sheetali-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Cooling Breath</p>
+        <p><span class="highlight">Benefits:</span> Reduces body heat, calms anger.</p>
+        <p><span class="highlight">Steps:</span> Inhale through tongue, exhale nose.</p>
+        <p><span class="highlight">Duration:</span> 2–3 minutes.</p>
+      </div>
+    </div>
+
+    <!-- Anulom Vilom -->
+    <div class="pranayama-card" onclick="toggleDetails('anulom')">
+      <img src="https://th.bing.com/th/id/OIP.MIK59vi1mAbW5m4fl1gFYgHaE5?w=235&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Anulom Vilom" />
+      <h3>Anulom Vilom</h3>
+      <div id="anulom-details" class="hidden-details">
+        <p><span class="highlight">Also Called:</span> Controlled Nostril Breath</p>
+        <p><span class="highlight">Benefits:</span> Increases lung capacity and focus.</p>
+        <p><span class="highlight">Steps:</span> Alternate nostrils with finger control.</p>
+        <p><span class="highlight">Duration:</span> 5–15 minutes daily.</p>
+      </div>
+    </div>
+
+  
+   <!-- Dirga Pranayama -->
+   <div class="pranayama-card" onclick="toggleDetails('dirga')">
+    <img src="data:image/jpeg;base64,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" alt="Dirga Pranayama" />
+    
+    <h3>Dirga Pranayama</h3>
+    <div id="dirga-details" class="hidden-details">
+      <p><span class="highlight">Also Called:</span> Three Part Breath</p>
+      <p><span class="highlight">Benefits:</span> Calms the mind and body.</p>
+      <p><span class="highlight">Steps:</span> Inhale into belly, ribs, and chest. Exhale in reverse order.</p>
+      <p><span class="highlight">Duration:</span> 5–10 minutes daily.</p>
+    </div>
+  </div>
+
+
+  <!-- Shitali Pranayama -->
+  <div class="pranayama-card" onclick="toggleDetails('shitali')">
+    <img src="data:image/jpeg;base64,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" alt="Shitali Pranayama" />
+    <h3>Shitali Pranayama</h3>
+    <div id="shitali-details" class="hidden-details">
+      <p><span class="highlight">Also Called:</span> Cooling Breath</p>
+      <p><span class="highlight">Benefits:</span> Cools body and mind, reduces stress.</p>
+      <p><span class="highlight">Steps:</span> Curl the tongue, inhale through mouth, exhale through nose.</p>
+      <p><span class="highlight">Duration:</span> 2–5 minutes or as needed.</p>
+    </div>
+  </div>
+
+ 
+
+</div>
+
+  <script>
+    function toggleDetails(id) {
+      const section = document.getElementById(`${id}-details`);
+      section.style.display = section.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>

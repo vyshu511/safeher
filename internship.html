@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internship Opportunities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #1e1e2f;
+      --secondary: #FF6B9E;
+      --accent: #dc7dff;
+      --white: #FFFFFF;
+      --dark-text: #000000;
+      --light-bg: #f2f2f2;
+      --border-radius: 10px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--primary);
+      color: var(--white);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      background: var(--secondary);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--accent);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--secondary);
+    }
+
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    .light-mode {
+      --primary: #f2f2f2;
+      --white: #000000;
+      --glass: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Internship Opportunities
+    <span class="theme-toggle" onclick="toggleTheme()">
+      <i class="fas fa-adjust"></i>
+    </span>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>Internshala</h3>
+      <a href="https://internshala.com/internships" target="_blank">https://internshala.com/internships</a>
+    </div>
+    <div class="card">
+      <h3>LetsIntern</h3>
+      <a href="https://www.letsintern.com" target="_blank">https://www.letsintern.com</a>
+    </div>
+    <div class="card">
+      <h3>FoundIt (Monster)</h3>
+      <a href="https://www.foundit.in" target="_blank">https://www.foundit.in</a>
+    </div>
+    <div class="card">
+      <h3>Wellfound (AngelList)</h3>
+      <a href="https://angel.co/jobs" target="_blank">https://angel.co/jobs</a>
+    </div>
+    <div class="card">
+      <h3>LinkedIn</h3>
+      <a href="https://www.linkedin.com/jobs/internships" target="_blank">https://www.linkedin.com/jobs/internships</a>
+    </div>
+    <div class="card">
+      <h3>Google</h3>
+      <a href="https://careers.google.com/students" target="_blank">https://careers.google.com/students</a>
+    </div>
+    <div class="card">
+      <h3>Microsoft</h3>
+      <a href="https://careers.microsoft.com/students/us/en" target="_blank">https://careers.microsoft.com/students/us/en</a>
+    </div>
+    <div class="card">
+      <h3>TCS</h3>
+      <a href="https://www.tcs.com/careers/india/internship" target="_blank">https://www.tcs.com/careers/india/internship</a>
+    </div>
+    <div class="card">
+      <h3>Wipro</h3>
+      <a href="https://careers.wipro.com/internships" target="_blank">https://careers.wipro.com/internships</a>
+    </div>
+    <div class="card">
+      <h3>Infosys</h3>
+      <a href="https://careers.infosys.com/internships" target="_blank">https://careers.infosys.com/internships</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
+</body>
+</html>

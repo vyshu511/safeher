@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SereneMind | Meditation & Mindfulness</title>
+    <style>
+        /* CSS Reset & Base Styles */
+        :root {
+            --primary: #4F8A8B;
+            --secondary: #FBD46D;
+            --light: #F4F6FF;
+            --dark: #071E3D;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1518604666860-9ed391f76460?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            animation: fadeIn 2.5s ease;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--dark);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tips Section (hidden by default) */
+        .feature-tips {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            text-align: left;
+            background-color: rgba(251, 212, 109, 0.1);
+            border-radius: 0 0 10px 10px;
+            margin: 0 -2rem -2rem;
+            padding: 0 2rem;
+        }
+        
+        .feature-tips.active {
+            max-height: 1000px;
+            padding: 0 2rem 2rem;
+        }
+        
+        .feature-tips h4 {
+            margin-top: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .feature-tips ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .feature-tips li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Meditation Player */
+        .meditation-player {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .track-list {
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .track {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .track:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        
+        .track-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .track-number {
+            margin-right: 1rem;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .play-btn {
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .testimonial-slider {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-slide {
+            padding: 2rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+        
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 5%;
+            text-align: center;
+            background-color: var(--light);
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-submit {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-submit:hover {
+            background-color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 50px;
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-submit {
+                border-radius: 50px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Serene<span>Mind</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                
+                <li><a href="#">About</a></li>
+                
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find Your Inner Peace</h1>
+            <p>Discover the transformative power of meditation with our science-backed programs designed for modern life.</p>
+            
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose SereneMind?</h2>
+        <p class="section-subtitle">Our unique approach combines ancient wisdom with modern neuroscience for maximum benefits</p>
+        
+        <div class="features-grid">
+            <div class="feature-card" onclick="toggleTips(1)">
+                <div class="feature-icon">💤</div>
+                <h3>Better Sleep</h3>
+                <p>Fall asleep faster and wake up refreshed with our guided sleep meditations.</p>
+                
+                <div class="feature-tips" id="tips-1">
+                    <h4>Tips for Better Sleep:</h4>
+                    <ul>
+                        <li>Establish a consistent sleep schedule</li>
+                        <li>Create a relaxing bedtime routine</li>
+                        <li>Keep your bedroom cool and dark</li>
+                        <li>Avoid screens 1 hour before bed</li>
+                        <li>Limit caffeine after 2pm</li>
+                    </ul>
+                    
+                    <h4>Meditation Poses:</h4>
+                    <ul>
+                        <li><strong>Corpse Pose (Savasana):</strong> Lie flat on your back with arms at sides</li>
+                        <li><strong>Legs-Up-the-Wall Pose (Viparita Karani):</strong> Lie on your back with legs vertically up a wall</li>
+                        <li><strong>Child's Pose (Balasana):</strong> Kneel and fold forward with arms extended</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="feature-card" onclick="toggleTips(2)">
+                <div class="feature-icon">🧠</div>
+                <h3>Reduced Stress</h3>
+                <p>Proven techniques to lower cortisol levels and increase resilience.</p>
+                
+                <div class="feature-tips" id="tips-2">
+                    <h4>Stress Reduction Tips:</h4>
+                    <ul>
+                        <li>Practice deep breathing exercises</li>
+                        <li>Take regular breaks throughout the day</li>
+                        <li>Engage in physical activity daily</li>
+                        <li>Limit news and social media consumption</li>
+                        <li>Practice gratitude journaling</li>
+                    </ul>
+                    
+                    <h4>Meditation Techniques:</h4>
+                    <ul>
+                        <li><strong>Mindful Breathing:</strong> Focus solely on your breath for 5-10 minutes</li>
+                        <li><strong>Body Scan:</strong> Systematically relax each part of your body</li>
+                        <li><strong>Loving-Kindness Meditation:</strong> Send positive thoughts to yourself and others</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="feature-card" onclick="toggleTips(3)">
+                <div class="feature-icon">🎯</div>
+                <h3>Improved Focus</h3>
+                <p>Sharpen your concentration and productivity with mindfulness exercises.</p>
+                
+                <div class="feature-tips" id="tips-3">
+                    <h4>Focus Improvement Tips:</h4>
+                    <ul>
+                        <li>Work in 25-minute focused intervals (Pomodoro technique)</li>
+                        <li>Minimize multitasking</li>
+                        <li>Create a dedicated workspace</li>
+                        <li>Stay hydrated throughout the day</li>
+                        <li>Take short movement breaks every hour</li>
+                    </ul>
+                    
+                    <h4>Focus Meditation Techniques:</h4>
+                    <ul>
+                        <li><strong>Single-Point Focus:</strong> Concentrate on a candle flame or small object</li>
+                        <li><strong>Mantra Meditation:</strong> Repeat a calming word or phrase</li>
+                        <li><strong>Walking Meditation:</strong> Focus on each step and breath</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Testimonials -->
+    
+                
+
+    <!-- Newsletter -->
+    
+
+    <!-- Footer -->
+    <footer>
+       
+        <div class="copyright">
+            <p>&copy; 2023 SereneMind. All rights reserved. | "Peace comes from within."</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Audio Player Functionality
+        const audioPlayer = document.getElementById('audio-player');
+        const tracks = [
+            { 
+                title: "Morning Energy Boost", 
+                src: "audio/morning-relaxing-144011.mp3",
+                duration: "6 min"
+            },
+            { 
+                title: "Anxiety Relief", 
+                src: "https://assets.mixkit.co/sfx/preview/mixkit-meditation-bell-in-the-forest-887.mp3",
+                duration: "10 min"
+            },
+            { 
+                title: "Deep Sleep", 
+                src: "https://assets.mixkit.co/sfx/preview/mixkit-slow-meditation-gong-887.mp3",
+                duration: "15 min"
+            }
+        ];
+        
+        function playTrack(trackNumber) {
+            const track = tracks[trackNumber - 1];
+            audioPlayer.src = track.src;
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+            
+            // Update UI to show playing state
+            document.querySelectorAll('.track').forEach((el, index) => {
+                const btn = el.querySelector('.play-btn');
+                if (index === trackNumber - 1) {
+                    btn.innerHTML = '❚❚';
+                    el.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                } else {
+                    btn.innerHTML = '▶';
+                    el.style.backgroundColor = 'transparent';
+                }
+            });
+        }
+        
+        // When audio ends, reset the play button
+        audioPlayer.addEventListener('ended', function() {
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.innerHTML = '▶';
+            });
+            document.querySelectorAll('.track').forEach(track => {
+                track.style.backgroundColor = 'transparent';
+            });
+        });
+        
+        // Testimonial Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        function goToSlide(n) {
+            showSlide(n);
+        }
+        
+        // Auto-advance testimonials
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = e.target.querySelector('input').value;
+                alert(`Thank you! Your free course will be sent to ${email}`);
+                e.target.reset();
+            });
+        }
+        
+        // Feature tips toggle
+        function toggleTips(featureNumber) {
+            const tips = document.getElementById(`tips-${featureNumber}`);
+            tips.classList.toggle('active');
+            
+            // Close other tips when opening a new one
+            if (tips.classList.contains('active')) {
+                document.querySelectorAll('.feature-tips').forEach((tip) => {
+                    if (tip.id !== `tips-${featureNumber}` && tip.classList.contains('active')) {
+                        tip.classList.remove('active');
+                    }
+                });
+            }
+        }
+        
+        // Close tips when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.feature-card')) {
+                document.querySelectorAll('.feature-tips').forEach(tip => {
+                    tip.classList.remove('active');
+                });
+            }
+        });
+        
+        // Animate elements when scrolling
+        window.addEventListener('scroll', () => {
+            const features = document.querySelector('.features-grid');
+            const featuresPosition = features.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (featuresPosition < screenPosition) {
+                features.style.opacity = '1';
+                features.style.transform = 'translateY(0)';
+            }
+        });
+    </script>
+    
+    <!-- Font Awesome for icons (loaded externally but works without it) -->
+    <script>
+        // Fallback for Font Awesome icons
+        document.addEventListener('DOMContentLoaded', function() {
+            const icons = {
+                'fa-bars': '☰',
+                'fa-facebook-f': 'f',
+                'fa-twitter': 't',
+                'fa-instagram': 'ig',
+                'fa-youtube': 'yt'
+            };
+            
+            document.querySelectorAll('[class^="fa-"]').forEach(icon => {
+                const iconClass = Array.from(icon.classList).find(cls => cls.startsWith('fa-'));
+                if (iconClass && icons[iconClass]) {
+                    icon.textContent = icons[iconClass];
+                }
+            });
+        });
+    </script>
+</body>
+</html>
